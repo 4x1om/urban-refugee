@@ -55,13 +55,28 @@
 			href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"
 		/>
 
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&family=BIZ+UDPMincho&family=Inter:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			.anuphan-regular {
+				font-family: "Anuphan", sans-serif;
+				font-optical-sizing: auto;
+				font-weight: 400;
+				font-style: normal;
+			}
+		</style>
+
 		<meta
 			name="viewport"
 			content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 		/>
 		<style>
-			#map_971e343df3820abbc09dab2ab257ddc0 {
+			#map_8e2f089a1c7e4448be1b60e5d8b364f1 {
 				position: relative;
 				width: 100%;
 				height: 100%;
@@ -74,10 +89,10 @@
 		</style>
 		<link rel="stylesheet" href="style.css" />
 	</head>
-	<body>
+	<body class="anuphan-regular">
 		<div class="app-container">
 			<div class="map-container">
-				<div class="folium-map" id="map_971e343df3820abbc09dab2ab257ddc0"></div>
+				<div class="folium-map" id="map_8e2f089a1c7e4448be1b60e5d8b364f1"></div>
 			</div>
 
 			<div class="sidebar">
@@ -86,10 +101,15 @@
 						NeighborHealth (formerly East Boston Community Health Center)
 					</h1>
 					<p class="refuge-neighborhood">Foxbury</p>
-					<p class="refuge-target">Target: Refugees, Immigrants</p>
+
+					<hr />
+
 					<h4 class="refuge-summary">
 						Refugee resettlement, referrals to services
 					</h4>
+
+					<p class="refuge-target">Target: Refugees, Immigrants</p>
+
 					<div class="refuge-type-container">
 						<div class="refuge-type">Legal</div>
 					</div>
@@ -99,6 +119,9 @@
 					<div class="refuge-languages-container">
 						<div class="refuge-language">English</div>
 					</div>
+
+					<hr />
+
 					<div class="refuge-infolist">
 						<div class="icon refuge-address-icon"></div>
 						<p class="text refuge-address-text">
@@ -122,7 +145,7 @@
 		<script>
 			$(document).on("checkLocation", (evt, data) => {
 				if (data && "name" in data) {
-					const name = data.name;
+					const { name, location } = data;
 					const refuge = refuges[data.name];
 					$(".refuge-main-container").show();
 
@@ -157,9 +180,9 @@
 
 					$(".refuge-address-text a").attr(
 						"href",
-						`https://www.google.com/maps/search/${refuge.address}`
+						`https://www.google.com/maps/search/${location}`
 					);
-					$(".refuge-address-text a").text(refuge.address);
+					$(".refuge-address-text a").text(location);
 
 					$(".refuge-hours-text").text(refuge.hours);
 					$(".refuge-phone-text").text(refuge.phone);
@@ -243,10 +266,11 @@
 					filters: ["Parking Available", "MBTA Accessible"],
 					target: "Any status ",
 					website: "https:\/\/www.ilctr.org\/about\/our-programs\/",
+					raw_address: "442 Main Street, Malden, MA 02148",
 					summary:
 						"offers free English classes, citizenship application services,",
 					address: "442 Main Street, Malden, MA 02148",
-					coords: null,
+					coords: "23.286089019542885,120.10000457417829",
 					neighborhood: "Greater Boston (not one of these neighborhoods)",
 					hours: null,
 					phone: "781-322-9777",
@@ -258,9 +282,10 @@
 					filters: null,
 					target: "Any status ",
 					website: "https:\/\/www.ifsi-usa.org\/whatwedo#services",
+					raw_address: "1626 Blue Hill Avenue, Mattapan, MA 02126",
 					summary: null,
 					address: "1626 Blue Hill Avenue, Mattapan, MA 02126",
-					coords: null,
+					coords: "118.72044023423439,133.46981661230654",
 					neighborhood: "Mattapan",
 					hours: null,
 					phone: "617.322.1348",
@@ -272,10 +297,11 @@
 					filters: null,
 					target: "Any status ",
 					website: "https:\/\/www.riancenter.org\/what\/",
+					raw_address: "One State Street, Boston, MA 02109",
 					summary:
 						"ESL classes, citizenship education, career and education coaching, computer literacy classes",
 					address: "One State Street, Boston, MA 02109",
-					coords: null,
+					coords: "5.698978495414366,-103.79617469577342",
 					neighborhood: "Downtown",
 					hours: "9am - 4pm",
 					phone: null,
@@ -293,9 +319,10 @@
 					filters: ["MBTA Accessible"],
 					target: "Any status ",
 					website: "https:\/\/iine.org\/",
+					raw_address: "2 Boylston Street, 3rd Floor Boston, MA 02116",
 					summary: null,
-					address: "2 Boylston Street, 3rd Floor Boston, MA 02116",
-					coords: null,
+					address: "2 Boylston Street, MA 02116",
+					coords: "-149.0419694041963,-175.9783058606179",
 					neighborhood: "Downtown",
 					hours: "9am - 5pm",
 					phone: "617-695-9990",
@@ -315,10 +342,11 @@
 					filters: null,
 					target: "Any status ",
 					website: "https:\/\/bostonabcd.org\/allprograms\/",
+					raw_address: "178 Tremont St, Boston, MA 02111",
 					summary:
 						"Legal: Offers services to help with the naturalization (citizenship) application process\n- A screening session to determine eligibility for citizenship\n- Help completing the application and fee waiver\n- Preparation for the USCIS Citizenship Interview\n- Offers services to help with green card renewal and replacement applications\n- There are residency and income-eligibility requirements*\n",
 					address: "178 Tremont St, Boston, MA 02111",
-					coords: null,
+					coords: "53.41334426581932,-167.48014565162728",
 					neighborhood: "Downtown",
 					hours: "M,Tues 9am-5pm; Wed, Thurs 8am-5pm, Fri 9am-4pm",
 					phone: "(617) 357-6000",
@@ -330,9 +358,10 @@
 					filters: null,
 					target: "Any status ",
 					website: "https:\/\/ebecc.org\/",
+					raw_address: "282 Meridian St, Boston, MA 02128",
 					summary: null,
 					address: "282 Meridian St, Boston, MA 02128",
-					coords: null,
+					coords: "73.34476930142276,113.90727606490498",
 					neighborhood: "East Boston",
 					hours: "9am - 6pm",
 					phone: null,
@@ -344,10 +373,11 @@
 					filters: null,
 					target: "Any status ",
 					website: "https:\/\/www.ccab.org\/what-we-do\/",
+					raw_address: "275 W Broadway, Boston, MA 02127",
 					summary:
 						"family and youth services, basic needs, immigrant and refugee services, adult education and workforce development, ",
 					address: "275 W Broadway, Boston, MA 02127",
-					coords: null,
+					coords: "121.26169587454353,15.955401665415735",
 					neighborhood: "South Boston",
 					hours: "7:30am - 6pm",
 					phone: "617-464-8500",
@@ -360,10 +390,11 @@
 					target: "Any status ",
 					website:
 						"https:\/\/www.jvs-boston.org\/refugee-immigrant-employment-services-2\/",
+					raw_address: "75 Federal St, 3rd floor, Boston, MA 02110",
 					summary:
 						"Career coaching, English classes, job search assistance, interview preparation, skills training, career advancement services",
-					address: "75 Federal St, 3rd floor, Boston, MA 02110",
-					coords: null,
+					address: "75 Federal St, Boston, MA 02110",
+					coords: "133.2679212461881,80.92918011705507",
 					neighborhood: "Citywide ",
 					hours: "9am - 5 PM",
 					phone: "617-399-3131, TTY: 711",
@@ -385,10 +416,11 @@
 					target: "Refugees \/ Immigrants",
 					website:
 						"https:\/\/masshiredowntownboston.org\/refugee-immigrant-resources\/",
+					raw_address: "75 Federal St, 3rd Floor, Boston, MA 02110",
 					summary:
 						"Free English classes, resume creation worksheets + templates, job application assistance",
-					address: "75 Federal St, 3rd Floor, Boston, MA 02110",
-					coords: null,
+					address: "75 Federal St, Boston, MA 02110",
+					coords: "-102.15722690528611,152.08339404260323",
 					neighborhood: "Downtown",
 					hours: "9am - 5pm",
 					phone: "617-399-3100",
@@ -400,11 +432,13 @@
 					filters: ["MBTA Accessible"],
 					target: "Any status ",
 					website: "https:\/\/ebcsk.org\/",
+					raw_address:
+						"Our Saviour's Lutheran Church, 28 Paris Street, Boston, MA, 02128",
 					summary:
 						"Monday is Food distribution, Tuesday in-door hotmeals (both FREE)\n----\nMonday: food distribution to help those facing hunger, homelessness, and other challenging life situations. \nTuesdays: hot meals served in a welcoming environment where everyone is treated with dignity and respect. \nOur mission is to provide not only nourishment but also a sense of community and support to all who come to us.\nFree, no ID required\nFounded by an El Salvadoran immigrant, Sandra Nijjar",
 					address:
 						"Our Saviour\u2019s Lutheran Church, 28 Paris Street, Boston, MA, 02128",
-					coords: null,
+					coords: "54.746584836800935,107.27973510399715",
 					neighborhood: "East Boston",
 					hours:
 						"Open Monday and Tuesday, Monday is Food distribution, Tuesday in-door hotmeals, hours not on website",
@@ -417,10 +451,11 @@
 					filters: ["Parking Available"],
 					target: "Any status, no ID required",
 					website: "https:\/\/roslindalefoodcollective.org\/",
-					summary: "Free food distribution every Sunday at 3 pm (FREE)",
-					address:
+					raw_address:
 						"Trinity Church\n1195 Centre Street, West Roxbury (Address of distribution, organization does not have its own office)",
-					coords: null,
+					summary: "Free food distribution every Sunday at 3 pm (FREE)",
+					address: "1195 Centre Street, West Roxbury",
+					coords: "3.8611011701905795,78.82999313825582",
 					neighborhood: "Roslindale, West Roxbury",
 					hours: "Sunday 3-3:30pm",
 					phone: "no public facing phone number",
@@ -433,10 +468,11 @@
 					target:
 						"Any status, No eligibility requirements, no registration, and no ID checks.",
 					website: "https:\/\/www.fairfoods.org\/ ",
+					raw_address: "10 Parish St, Dorchester, MA 02122",
 					summary:
 						"$2 bag containing over twelve pounds of mixed fresh produce. Items range from fresh spinach, mangoes, potatoes, and more. No eligibility requirements, no registration, and no ID checks. Take as many bags as you need for yourself, friends, or family. \n",
 					address: "10 Parish St, Dorchester, MA 02122",
-					coords: null,
+					coords: "157.48190168933553,172.1986316972101",
 					neighborhood: "Dorchester",
 					hours: "Friday 2-4pm",
 					phone: "(617) 436-0527",
@@ -449,9 +485,10 @@
 					target:
 						"help eligible, legal permanent residents (LPRs) to overcome barriers to naturalization",
 					website: "https:\/\/projectcitizenship.org\/",
+					raw_address: "11 Beacon St Unit 1210, Boston, MA 02108",
 					summary: "Legal help applying for citizenship",
-					address: "11 Beacon St Unit 1210, Boston, MA 02108",
-					coords: null,
+					address: "11 Beacon St, Boston, MA 02108",
+					coords: "-9.176589075124951,-32.2799431112019",
 					neighborhood: "Downtown",
 					hours: "M-F 9:30am-4:30pm",
 					phone: " 617-694-5949 ",
@@ -463,10 +500,11 @@
 					filters: ["MBTA Accessible"],
 					target: "Refugees \/ Immigrants",
 					website: "https:\/\/www.riacboston.org\/where-we-work\/",
+					raw_address: "253 Roxbury St, Boston, MA 02119",
 					summary:
 						"Refugee resettlement, referrals to services, assistance with benefits, social adjustment counseling, interpretation, case work, citizen application assistance, community education programs \n",
 					address: "253 Roxbury St, Boston, MA 02119",
-					coords: null,
+					coords: "164.88242051094608,-97.84918103580665",
 					neighborhood: "Roxbury",
 					hours: "9am-5pm",
 					phone: "(617) 238-2430",
@@ -496,10 +534,11 @@
 					target: "Refugees \/ Immigrants",
 					website:
 						"https:\/\/www.mass.gov\/orgs\/office-for-refugees-and-immigrants ",
+					raw_address: "600 Washington St 4th floor, Boston, MA 02111",
 					summary:
 						"financial literacy, citizenship for new americans, refugee employment, education, youth, health, other services, ",
-					address: "600 Washington St 4th floor, Boston, MA 02111",
-					coords: null,
+					address: "600 Washington St, Boston, MA 02111",
+					coords: "169.5780148316395,5.824445233015126",
 					neighborhood: "Downtown",
 					hours: "9am-5pm",
 					phone: "617-727-7888",
@@ -511,10 +550,11 @@
 					filters: ["MBTA Accessible"],
 					target: "Unacompannied minors",
 					website: "https:\/\/supportkind.org\/",
+					raw_address: "11 Beacon St, Suite 820, Boston MA 02108",
 					summary:
 						"- Services for unaccompanied immigrant and refugee children (entered the US under the age of 18 without a parent or legal guardian) seeking humanitarian immigration protection and defense from deportation \n- Provides unaccompanied children with legal assistance including\u2026 Adjustment of status, Asylum applications, Removal hearings, Special Immigrant Juvenile Status, T Visas, U Visas\n- Must live in one of the following MA counties: Suffolk, Essex, Middlesex, Norfolk, Plymouth, or Bristol\n- Legal services are FREE and no income-eligibility requirements",
-					address: "11 Beacon St, Suite 820, Boston MA 02108",
-					coords: null,
+					address: "11 Beacon St, Boston MA 02108",
+					coords: "-12.09399509119524,-111.35762855841918",
 					neighborhood: "Downtown",
 					hours: "Mon - Fri 9am - 5pm",
 					phone: "617-207-4138",
@@ -526,10 +566,11 @@
 					filters: ["MBTA Accessible"],
 					target: "Any status",
 					website: "https:\/\/www.bhchp.org\/",
+					raw_address: "780 Albany Street\nBoston, MA 02118",
 					summary:
 						"- access to all BHCHP clinical spaces including dedicated sites and services for immigrants (Women's health, HIV care, Hepatitis C care, and Gender care)",
-					address: "780 Albany Street\nBoston, MA 02118",
-					coords: null,
+					address: "780 Albany Street, MA 02118",
+					coords: "64.17142373182784,126.73808364584158",
 					neighborhood: "South End",
 					hours:
 						"M 8am\u2013 5pm\nT 8am \u2013 12pm & 4pm \u2013 8pm\nW 8am \u2013 5pm\nTh 8am \u2013 8pm\nF 8am \u2013 5pm",
@@ -542,10 +583,11 @@
 					filters: ["LGBTQ+ Friendly", "MBTA Accessible"],
 					target: "Any status",
 					website: "http:\/\/www.cpresente.org",
+					raw_address: "12 Bennington St Suite 202, Boston, MA 02145",
 					summary:
 						"Education for empowerment program, which features ESOL classes and citizenship and civic participation classes for adults; community organizing and advocacy programs ",
-					address: "12 Bennington St Suite 202, Boston, MA 02145",
-					coords: null,
+					address: "12 Bennington St, MA 02145",
+					coords: "21.883965126731454,-135.52362052284866",
 					neighborhood: "East Boston",
 					hours: "Only open Thursday, Friday, Saturday 9am - 5pm",
 					phone: "(857) 256-2981",
@@ -565,11 +607,12 @@
 					target: "asylum seekers, refugees, torture survivors, families",
 					website:
 						"https:\/\/www.bcrhhr.com\/; https:\/\/www.bmc.org\/immigrant-refugee-health-center ",
+					raw_address:
+						"Dowling Building at BMC - 850 Harrison Ave 7th Floor, Boston, MA 02118",
 					summary:
 						"BCRHHR: Medical Care, Mental Health Services, Social Services, Evaluations for Asylum Cases, Legal Referrals, Career Development Services for Asylum Seekers, Support Groups\n\nIRHC at BMC: \n\nThe BMC Immigrant & Refugee Health Center (IRHC) works with providers across BMC to connect our patients with primary care, mental health care, medical specialty care, and social services, all tailored to the needs of immigrant and refugee patients. While we can help our patients connect with any services available across BMC, there are several departments and programs that are affiliated with our Center. In addition to the list below, we also provide:\n\nReferrals for legal consultations for asylum seekers\nForensic psychological assessments \nLimited in-house development services for clients ",
-					address:
-						"Dowling Building at BMC - 850 Harrison Ave 7th Floor, Boston, MA 02118",
-					coords: null,
+					address: "850 Harrison Ave, Boston, MA 02118",
+					coords: "-48.17545342443353,-82.79634035491259",
 					neighborhood: "Roxbury, South End",
 					hours: "M-F 9am-5pm",
 					phone: "617-414-1994",
@@ -581,9 +624,10 @@
 					filters: ["Digital Resources Only"],
 					target: "asylum seekers, refugees, torture survivors, families",
 					website: "https:\/\/refugees.org\/",
+					raw_address: null,
 					summary: null,
 					address: null,
-					coords: null,
+					coords: "-142.09688660130382,17.80006688578888",
 					neighborhood: null,
 					hours: null,
 					phone: null,
@@ -596,10 +640,11 @@
 					target:
 						'"Brazilian, Cabo Verdean, Portuguese and other Portuguese-speaking communities"',
 					website: "https:\/\/maps-inc.org\/",
+					raw_address: "697 Cambridge St., Suite 203\nBrighton, MA 02135",
 					summary:
 						"clinical (child and family), citizenship assistance, corrective intervention\/education, DV\/SA advocacy, driver's license for all, elder services, employment and career assistance, immigrant integration, translations; HEALTH: insurance assistance, HIV\/STIs, mental health",
-					address: "697 Cambridge St., Suite 203\nBrighton, MA 02135",
-					coords: null,
+					address: "697 Cambridge St.,\nBrighton, MA 02135",
+					coords: "-31.541803438561544,25.76367532869139",
 					neighborhood: "Brighton",
 					hours: "9am-5pm",
 					phone: "617-787-0557",
@@ -611,10 +656,11 @@
 					filters: ["Digital Resources Only"],
 					target: "any status",
 					website: "https:\/\/www.gbfb.org\/",
+					raw_address: "70 South Bay Avenue, Boston, MA 02118",
 					summary:
 						"food pantries, soup kitchens, meal programs like SNAP\/EBT, senior centers, etc",
 					address: "70 South Bay Avenue, Boston, MA 02118",
-					coords: null,
+					coords: "82.0926162160028,-29.99020260354598",
 					neighborhood: "South Boston, South End",
 					hours: "8am-4:30pm",
 					phone: "617.598.5000",
@@ -626,10 +672,11 @@
 					filters: ["MBTA Accessible"],
 					target: null,
 					website: "https:\/\/braziliancenter.org\/",
+					raw_address: "14 Harvard Ave # 2, Allston, MA 02134",
 					summary:
 						"Provides services on educating immigrants on their rights and supporting them through the employment process",
 					address: "14 Harvard Ave # 2, Allston, MA 02134",
-					coords: null,
+					coords: "34.003719094012126,118.75022257176408",
 					neighborhood: "Allston",
 					hours: "M-F 10am-4pm",
 					phone: "(617) 783-8001",
@@ -641,10 +688,12 @@
 					filters: ["MBTA Accessible"],
 					target: "any status",
 					website: "https:\/\/www.neighborhealth.com\/en\/about\/who-we-are\/",
+					raw_address:
+						"including Winthrop, Everett, Revere, South End (multiple locations)",
 					summary: "primary care, specialty care, healthcare overall",
 					address:
-						"multiple locations, including Winthrop, Everett, Revere, South End",
-					coords: null,
+						"20 Maverick Square, Boston MA()()10 Gove Street, Boston MA()()79 Paris Street, Boston MA()()250 Sumner Street, Boston MA()()282 Meridian Street, Boston MA()()151 Orleans Street, Boston MA()()155 Addison Street, Boston MA()()225 Sumner Street, Boston MA()()1601 Washington Street, Boston MA()()400 Shawmut Avenue, Boston MA()()17 Main Street, Boston MA()()26 Sturgis Street, MA 02132()()801 Broadway, Boston MA()()10 Garofalo Street, MA 02151",
+					coords: "74.12800794503931,-101.66236506475549",
 					neighborhood:
 						"East Boston, South End, Greater Boston (not one of these neighborhoods)",
 					hours: "8am-5pm most locations",
@@ -657,9 +706,10 @@
 					filters: ["MBTA Accessible"],
 					target: "immigrants, refugees, ",
 					website: "https:\/\/miracoalition.org\/about-us\/",
+					raw_address: "69 Canal Street 3rd Floor, Boston, MA 02114",
 					summary: "citizenship, immigrant assistance services program",
-					address: "69 Canal Street 3rd Floor, Boston, MA 02114",
-					coords: null,
+					address: "69 Canal Street, Boston, MA 02114",
+					coords: "-47.456511992526146,109.05768672978309",
 					neighborhood: "East Boston, South End",
 					hours: "9am - 5pm",
 					phone: "(617) 350-5480",
@@ -671,10 +721,11 @@
 					filters: ["MBTA Accessible"],
 					target: "immigrants, refugees, ",
 					website: "https:\/\/www.csioboston.org\/",
+					raw_address: "89 South Street Suite 203, Boston, MA. 02111",
 					summary:
 						"The center supports and helps develop the work of individuals, groups, organizations and communities dedicated to organizing immigrants around the issues that affect their lives. The goal is to help immigrants in the forefront of community and workplace struggles to develop their power and leadership and succeed in life. ",
-					address: "89 South Street Suite 203, Boston, MA. 02111",
-					coords: null,
+					address: "89 South Street, Boston, MA. 02111",
+					coords: "-15.076229442839008,155.97880245179374",
 					neighborhood: "Downtown",
 					hours: "9am - 5pm",
 					phone: "(617) 742-5165",
@@ -686,10 +737,11 @@
 					filters: ["MBTA Accessible"],
 					target: "any status, immigrants, low income individuals",
 					website: "https:\/\/www.gbls.org\/ ",
+					raw_address: "197 Friend Street Boston, MA 02114",
 					summary:
 						"provide free legal assistance to families and individuals living in poverty to help them assert their rights and secure the most basic necessities of life",
 					address: "197 Friend Street Boston, MA 02114",
-					coords: null,
+					coords: "78.42317502889193,-12.160216924373913",
 					neighborhood:
 						"Citywide , Greater Boston (not one of these neighborhoods)",
 					hours: "9am - 5pm",
@@ -708,10 +760,11 @@
 					filters: ["Digital Resources Only"],
 					target: "any status",
 					website: "https:\/\/ymcaboston.org\/mobilemarket\/",
+					raw_address: "varies per truck location",
 					summary:
 						"mobile trucks that provide produce and shelf-stable food products, all around greater boston",
-					address: "varies per truck location",
-					coords: null,
+					address: null,
+					coords: "86.2687531813296,-21.35636012922282",
 					neighborhood:
 						"Citywide , Greater Boston (not one of these neighborhoods)",
 					hours: "varies per truck and location",
@@ -730,10 +783,11 @@
 					filters: ["MBTA Accessible"],
 					target: "refugees, immigrants",
 					website: "https:\/\/waldorefugee.org\/#about",
+					raw_address: "257 Roxbury Street, Roxbury MA 02119",
 					summary:
 						"Provides housing assistance, immigration referrals, free financial literacy programs and workshops",
 					address: "257 Roxbury Street, Roxbury MA 02119",
-					coords: null,
+					coords: "-28.149598481147507,118.12949786069231",
 					neighborhood: "Roxbury",
 					hours: null,
 					phone: "781-408-8939 ",
@@ -746,11 +800,13 @@
 					target:
 						"students grades 1-12, most of whom are Boston residents\/BPS students, and 1st\/2nd generation immigrants from African Diaspora",
 					website: "https:\/\/www.acedone.org\/youth-programs",
+					raw_address:
+						"89 South Street Suite 203, Boston, MA 02111 48 John Eliot Square, Roxbury MA 02119\n\n",
 					summary:
 						"partners with families to help African refugees and immigrants in Boston develop a community by providing education services such as after-school tutoring, college prep, and leadership development for refugee youth ",
 					address:
-						"89 South Street Suite 203, Boston, MA 02111 48 John Eliot Square, Roxbury MA 02119\n\n",
-					coords: null,
+						"89 South Street, Boston, MA 02111 ()() 48 John Eliot Square, Roxbury MA 02119",
+					coords: "-171.85386874178894,-58.04604110887264",
 					neighborhood: "South Boston, Roxbury",
 					hours: "9am - 5pm",
 					phone: "(617)-708-0754",
@@ -762,10 +818,11 @@
 					filters: ["MBTA Accessible"],
 					target: "asylum seekers, immigrants ",
 					website: null,
+					raw_address: "98 N Washington st #106, Boston, MA 02114",
 					summary:
 						"works with their own and external services to provide legal services pro-bono to asylum seekers and immigrants requiring assistance additional services are extended through contact with other organizations",
-					address: "98 N Washington st #106, Boston, MA 02114",
-					coords: null,
+					address: "98 N Washington st, Boston, MA 02114",
+					coords: "-132.19185924101717,91.36283348706627",
 					neighborhood: "North End",
 					hours: "9 am - 5 pm ",
 					phone: "(617) 742 - 9296 ",
@@ -780,8 +837,8 @@
 		</script>
 	</body>
 	<script>
-		var map_971e343df3820abbc09dab2ab257ddc0 = L.map(
-			"map_971e343df3820abbc09dab2ab257ddc0",
+		var map_8e2f089a1c7e4448be1b60e5d8b364f1 = L.map(
+			"map_8e2f089a1c7e4448be1b60e5d8b364f1",
 			{
 				center: [42.35, -71.2],
 				crs: L.CRS.EPSG3857,
@@ -797,7 +854,7 @@
 			}
 		);
 
-		var tile_layer_f51253a03983f1d4afe35a9e8cd164ef = L.tileLayer(
+		var tile_layer_494f3d3313f856cda36305f563ad5115 = L.tileLayer(
 			"https://tile.openstreetmap.org/{z}/{x}/{y}.png",
 			{
 				attribution:
@@ -813,1424 +870,1508 @@
 			}
 		);
 
-		tile_layer_f51253a03983f1d4afe35a9e8cd164ef.addTo(
-			map_971e343df3820abbc09dab2ab257ddc0
+		tile_layer_494f3d3313f856cda36305f563ad5115.addTo(
+			map_8e2f089a1c7e4448be1b60e5d8b364f1
 		);
 
-		var marker_ec57f89da2c6947d3e99663634ba0794 = L.marker(
+		var marker_483a31ba3dfab3020341374dba0a7e22 = L.marker(
 			[42.4271186, -71.0671071],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_219ad17226be509f50f45ca0fafd7a1d = L.AwesomeMarkers.icon({
+		var icon_996914d8df620ea7f5339d24ccba8e84 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "book",
 			iconColor: "white",
 			markerColor: "green",
 			prefix: "fa",
 		});
-		marker_ec57f89da2c6947d3e99663634ba0794.setIcon(
-			icon_219ad17226be509f50f45ca0fafd7a1d
+		marker_483a31ba3dfab3020341374dba0a7e22.setIcon(
+			icon_996914d8df620ea7f5339d24ccba8e84
 		);
 
-		var popup_d6889835a8cbf8838bdac35b2103e231 = L.popup({ maxWidth: "100%" });
+		var popup_1d13b911dc29c06753b10d5ecc4dbac1 = L.popup({ maxWidth: "100%" });
 
-		var html_00a3b1d2c94ef4e6d0d81656e3313fea = $(
-			`<div id="html_00a3b1d2c94ef4e6d0d81656e3313fea" style="width: 100.0%; height: 100.0%;">                          <div id="The Immigrant Learning Center">The Immigrant Learning Center</div>                                                  </div>`
+		var html_96018c5f665184604e9b549d55900475 = $(
+			`<div id="html_96018c5f665184604e9b549d55900475" style="width: 100.0%; height: 100.0%;">                          <div id="The Immigrant Learning Center">The Immigrant Learning Center</div>                                                  </div>`
 		)[0];
-		popup_d6889835a8cbf8838bdac35b2103e231.setContent(
-			html_00a3b1d2c94ef4e6d0d81656e3313fea
+		popup_1d13b911dc29c06753b10d5ecc4dbac1.setContent(
+			html_96018c5f665184604e9b549d55900475
 		);
 
-		marker_ec57f89da2c6947d3e99663634ba0794.bindPopup(
-			popup_d6889835a8cbf8838bdac35b2103e231
+		marker_483a31ba3dfab3020341374dba0a7e22.bindPopup(
+			popup_1d13b911dc29c06753b10d5ecc4dbac1
 		);
 
-		var marker_55f5971adff89bb38b4aa20f5c5ee01a = L.marker(
+		var marker_6750df618ea6ddabc3f098915b769cc2 = L.marker(
 			[42.286217, -71.0906896],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_8e6edc253caa6e24104fd8b8d5413e13 = L.AwesomeMarkers.icon({
+		var icon_95f6e6238135eebc369ffea0b1cc84c6 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "book",
 			iconColor: "white",
 			markerColor: "green",
 			prefix: "fa",
 		});
-		marker_55f5971adff89bb38b4aa20f5c5ee01a.setIcon(
-			icon_8e6edc253caa6e24104fd8b8d5413e13
+		marker_6750df618ea6ddabc3f098915b769cc2.setIcon(
+			icon_95f6e6238135eebc369ffea0b1cc84c6
 		);
 
-		var popup_3059a00d05d081a83ff6277993da9067 = L.popup({ maxWidth: "100%" });
+		var popup_f7c3964ebf6bed6e96c8e3838930ded2 = L.popup({ maxWidth: "100%" });
 
-		var html_51d9d8d326b0c55f368dcbf08c01f312 = $(
-			`<div id="html_51d9d8d326b0c55f368dcbf08c01f312" style="width: 100.0%; height: 100.0%;">                          <div id="Immigrant Family Services Institute ">Immigrant Family Services Institute </div>                                                  </div>`
+		var html_bbe9bc87bc1b85d24851d1422831b92b = $(
+			`<div id="html_bbe9bc87bc1b85d24851d1422831b92b" style="width: 100.0%; height: 100.0%;">                          <div id="Immigrant Family Services Institute ">Immigrant Family Services Institute </div>                                                  </div>`
 		)[0];
-		popup_3059a00d05d081a83ff6277993da9067.setContent(
-			html_51d9d8d326b0c55f368dcbf08c01f312
+		popup_f7c3964ebf6bed6e96c8e3838930ded2.setContent(
+			html_bbe9bc87bc1b85d24851d1422831b92b
 		);
 
-		marker_55f5971adff89bb38b4aa20f5c5ee01a.bindPopup(
-			popup_3059a00d05d081a83ff6277993da9067
+		marker_6750df618ea6ddabc3f098915b769cc2.bindPopup(
+			popup_f7c3964ebf6bed6e96c8e3838930ded2
 		);
 
-		var marker_a629e15d852c8a186e0431d8a3f4a6c8 = L.marker(
+		var marker_a839d107d58825f9ec2d78f1224cade0 = L.marker(
 			[42.3527552, -71.0584604224359],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_2f9b6b2a2fa685ac4424c61dc6a0e6f8 = L.AwesomeMarkers.icon({
+		var icon_1270a0db2223378d20bb987a28537ddf = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "book",
 			iconColor: "white",
 			markerColor: "green",
 			prefix: "fa",
 		});
-		marker_a629e15d852c8a186e0431d8a3f4a6c8.setIcon(
-			icon_2f9b6b2a2fa685ac4424c61dc6a0e6f8
+		marker_a839d107d58825f9ec2d78f1224cade0.setIcon(
+			icon_1270a0db2223378d20bb987a28537ddf
 		);
 
-		var popup_a61eef26ed24795223ab12f48826f29d = L.popup({ maxWidth: "100%" });
+		var popup_3edee3b72c92761a73d83bd7dad8595d = L.popup({ maxWidth: "100%" });
 
-		var html_e5c0dd942a749b2ab9a5a4f1ccf76e8f = $(
-			`<div id="html_e5c0dd942a749b2ab9a5a4f1ccf76e8f" style="width: 100.0%; height: 100.0%;">                          <div id="Rian Immigrant Center">Rian Immigrant Center</div>                                                  </div>`
+		var html_2fe94f7e07346e80a086d137c33abe18 = $(
+			`<div id="html_2fe94f7e07346e80a086d137c33abe18" style="width: 100.0%; height: 100.0%;">                          <div id="Rian Immigrant Center">Rian Immigrant Center</div>                                                  </div>`
 		)[0];
-		popup_a61eef26ed24795223ab12f48826f29d.setContent(
-			html_e5c0dd942a749b2ab9a5a4f1ccf76e8f
+		popup_3edee3b72c92761a73d83bd7dad8595d.setContent(
+			html_2fe94f7e07346e80a086d137c33abe18
 		);
 
-		marker_a629e15d852c8a186e0431d8a3f4a6c8.bindPopup(
-			popup_a61eef26ed24795223ab12f48826f29d
+		marker_a839d107d58825f9ec2d78f1224cade0.bindPopup(
+			popup_3edee3b72c92761a73d83bd7dad8595d
 		);
 
-		var marker_3079fd9b522652434ab9b1ca2fa3fbef = L.marker(
+		var marker_0a942ed9d60246dd0dd7a2484120e311 = L.marker(
 			[42.3520843, -71.0631338174366],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_62ca144532fe964e7446759d3a755928 = L.AwesomeMarkers.icon({
+		var icon_aa18482a44ce0cc644e9f207616b9550 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "bowl-food",
 			iconColor: "white",
 			markerColor: "red",
 			prefix: "fa",
 		});
-		marker_3079fd9b522652434ab9b1ca2fa3fbef.setIcon(
-			icon_62ca144532fe964e7446759d3a755928
+		marker_0a942ed9d60246dd0dd7a2484120e311.setIcon(
+			icon_aa18482a44ce0cc644e9f207616b9550
 		);
 
-		var popup_956c7c31d616697988f5c559197414c2 = L.popup({ maxWidth: "100%" });
+		var popup_4e4cea936b9b5d117293731f5e3f3101 = L.popup({ maxWidth: "100%" });
 
-		var html_7fd2526e9144f5a962ec7d6d5669fb0d = $(
-			`<div id="html_7fd2526e9144f5a962ec7d6d5669fb0d" style="width: 100.0%; height: 100.0%;">                          <div id="International Institute of New England">International Institute of New England</div>                                                  </div>`
+		var html_65fa627e7100d7e3f9c9b2f80265885a = $(
+			`<div id="html_65fa627e7100d7e3f9c9b2f80265885a" style="width: 100.0%; height: 100.0%;">                          <div id="International Institute of New England">International Institute of New England</div>                                                  </div>`
 		)[0];
-		popup_956c7c31d616697988f5c559197414c2.setContent(
-			html_7fd2526e9144f5a962ec7d6d5669fb0d
+		popup_4e4cea936b9b5d117293731f5e3f3101.setContent(
+			html_65fa627e7100d7e3f9c9b2f80265885a
 		);
 
-		marker_3079fd9b522652434ab9b1ca2fa3fbef.bindPopup(
-			popup_956c7c31d616697988f5c559197414c2
+		marker_0a942ed9d60246dd0dd7a2484120e311.bindPopup(
+			popup_4e4cea936b9b5d117293731f5e3f3101
 		);
 
-		var marker_50c203ac69066ab2d228731f35d30951 = L.marker(
+		var marker_0096849dac46db00f39e7a66e623c8c2 = L.marker(
 			[42.3520191, -71.0629688],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_665a75581b99557d51cf3d666e13cff6 = L.AwesomeMarkers.icon({
+		var icon_8b2e9f967e9783cfb4e57c73b1933a6f = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "book",
 			iconColor: "white",
 			markerColor: "green",
 			prefix: "fa",
 		});
-		marker_50c203ac69066ab2d228731f35d30951.setIcon(
-			icon_665a75581b99557d51cf3d666e13cff6
+		marker_0096849dac46db00f39e7a66e623c8c2.setIcon(
+			icon_8b2e9f967e9783cfb4e57c73b1933a6f
 		);
 
-		var popup_730d8ef89d4072a1662100d08e9cf4fe = L.popup({ maxWidth: "100%" });
+		var popup_314a4ad4130f537ef51141cf67b7f9f5 = L.popup({ maxWidth: "100%" });
 
-		var html_2467572553c3214bd7fad447e80102d2 = $(
-			`<div id="html_2467572553c3214bd7fad447e80102d2" style="width: 100.0%; height: 100.0%;">                          <div id="Action for Boston Community Development">Action for Boston Community Development</div>                                                  </div>`
+		var html_93d104c14b3c6190f2d481a08674cb63 = $(
+			`<div id="html_93d104c14b3c6190f2d481a08674cb63" style="width: 100.0%; height: 100.0%;">                          <div id="Action for Boston Community Development">Action for Boston Community Development</div>                                                  </div>`
 		)[0];
-		popup_730d8ef89d4072a1662100d08e9cf4fe.setContent(
-			html_2467572553c3214bd7fad447e80102d2
+		popup_314a4ad4130f537ef51141cf67b7f9f5.setContent(
+			html_93d104c14b3c6190f2d481a08674cb63
 		);
 
-		marker_50c203ac69066ab2d228731f35d30951.bindPopup(
-			popup_730d8ef89d4072a1662100d08e9cf4fe
+		marker_0096849dac46db00f39e7a66e623c8c2.bindPopup(
+			popup_314a4ad4130f537ef51141cf67b7f9f5
 		);
 
-		var marker_6b7d2f3df8ed5ec7c7e7944909b08b2b = L.marker(
+		var marker_670c0917af0e8a9b3e37c27bb9594d38 = L.marker(
 			[42.376546950000005, -71.03944463124805],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_f549ba382c9633db1f010e3bd73203ef = L.AwesomeMarkers.icon({
+		var icon_5f285841dc443571048e667cf714e1ca = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "book",
 			iconColor: "white",
 			markerColor: "green",
 			prefix: "fa",
 		});
-		marker_6b7d2f3df8ed5ec7c7e7944909b08b2b.setIcon(
-			icon_f549ba382c9633db1f010e3bd73203ef
+		marker_670c0917af0e8a9b3e37c27bb9594d38.setIcon(
+			icon_5f285841dc443571048e667cf714e1ca
 		);
 
-		var popup_f054b25aceddd23e03cfd5bec34f879b = L.popup({ maxWidth: "100%" });
+		var popup_439d2ca3260964cb20bf777b2a88c6f6 = L.popup({ maxWidth: "100%" });
 
-		var html_4d1648c5a9f83e2b6f4af80b6136d936 = $(
-			`<div id="html_4d1648c5a9f83e2b6f4af80b6136d936" style="width: 100.0%; height: 100.0%;">                          <div id="East Boston Community Council">East Boston Community Council</div>                                                  </div>`
+		var html_c05ac7b55820b12811fdd108d0640740 = $(
+			`<div id="html_c05ac7b55820b12811fdd108d0640740" style="width: 100.0%; height: 100.0%;">                          <div id="East Boston Community Council">East Boston Community Council</div>                                                  </div>`
 		)[0];
-		popup_f054b25aceddd23e03cfd5bec34f879b.setContent(
-			html_4d1648c5a9f83e2b6f4af80b6136d936
+		popup_439d2ca3260964cb20bf777b2a88c6f6.setContent(
+			html_c05ac7b55820b12811fdd108d0640740
 		);
 
-		marker_6b7d2f3df8ed5ec7c7e7944909b08b2b.bindPopup(
-			popup_f054b25aceddd23e03cfd5bec34f879b
+		marker_670c0917af0e8a9b3e37c27bb9594d38.bindPopup(
+			popup_439d2ca3260964cb20bf777b2a88c6f6
 		);
 
-		var marker_408b2f713870b7646e3f7593539c3518 = L.marker(
+		var marker_3ac2127550a97d71f0a1ca67b602d953 = L.marker(
 			[42.338818849999996, -71.05135479834671],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_dfcbbc2297758ad5336e5b1a340d768b = L.AwesomeMarkers.icon({
+		var icon_a5da122e3a7397d29819f774a9934589 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "book",
 			iconColor: "white",
 			markerColor: "green",
 			prefix: "fa",
 		});
-		marker_408b2f713870b7646e3f7593539c3518.setIcon(
-			icon_dfcbbc2297758ad5336e5b1a340d768b
+		marker_3ac2127550a97d71f0a1ca67b602d953.setIcon(
+			icon_a5da122e3a7397d29819f774a9934589
 		);
 
-		var popup_29408a2652f5625ba67a9a842c334ca2 = L.popup({ maxWidth: "100%" });
+		var popup_b3793d1a265638df8cc57466cbbddf5f = L.popup({ maxWidth: "100%" });
 
-		var html_e573b3890df992ed8920fdadf6594900 = $(
-			`<div id="html_e573b3890df992ed8920fdadf6594900" style="width: 100.0%; height: 100.0%;">                          <div id="Catholic Charities Boston">Catholic Charities Boston</div>                                                  </div>`
+		var html_c0bf16eca7f37d7ecb6c4eaa4c5ad2f6 = $(
+			`<div id="html_c0bf16eca7f37d7ecb6c4eaa4c5ad2f6" style="width: 100.0%; height: 100.0%;">                          <div id="Catholic Charities Boston">Catholic Charities Boston</div>                                                  </div>`
 		)[0];
-		popup_29408a2652f5625ba67a9a842c334ca2.setContent(
-			html_e573b3890df992ed8920fdadf6594900
+		popup_b3793d1a265638df8cc57466cbbddf5f.setContent(
+			html_c0bf16eca7f37d7ecb6c4eaa4c5ad2f6
 		);
 
-		marker_408b2f713870b7646e3f7593539c3518.bindPopup(
-			popup_29408a2652f5625ba67a9a842c334ca2
+		marker_3ac2127550a97d71f0a1ca67b602d953.bindPopup(
+			popup_b3793d1a265638df8cc57466cbbddf5f
 		);
 
-		var marker_8e43c3ddaa4b53d6864b2e7af99290a2 = L.marker(
+		var marker_adda51b23e82fefd35b483e5f359f0c3 = L.marker(
 			[42.355244400000004, -71.05693041374465],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_60de7c6f5bb069e315e56bc8876b2ff9 = L.AwesomeMarkers.icon({
+		var icon_f3f99201ff052dbc063b1cb024ebe5d6 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "question",
 			iconColor: "white",
 			markerColor: "lightblue",
 			prefix: "fa",
 		});
-		marker_8e43c3ddaa4b53d6864b2e7af99290a2.setIcon(
-			icon_60de7c6f5bb069e315e56bc8876b2ff9
+		marker_adda51b23e82fefd35b483e5f359f0c3.setIcon(
+			icon_f3f99201ff052dbc063b1cb024ebe5d6
 		);
 
-		var popup_60d719fbddd3769317776355353d82ea = L.popup({ maxWidth: "100%" });
+		var popup_7629bfeaffe940ec66d6ff6383dd5333 = L.popup({ maxWidth: "100%" });
 
-		var html_4a43778d1e422279bb58ba1dddd0aed5 = $(
-			`<div id="html_4a43778d1e422279bb58ba1dddd0aed5" style="width: 100.0%; height: 100.0%;">                          <div id="Jewish Vocational Service">Jewish Vocational Service</div>                                                  </div>`
+		var html_6be2f65ed6b49999cd9828bac76026a8 = $(
+			`<div id="html_6be2f65ed6b49999cd9828bac76026a8" style="width: 100.0%; height: 100.0%;">                          <div id="Jewish Vocational Service">Jewish Vocational Service</div>                                                  </div>`
 		)[0];
-		popup_60d719fbddd3769317776355353d82ea.setContent(
-			html_4a43778d1e422279bb58ba1dddd0aed5
+		popup_7629bfeaffe940ec66d6ff6383dd5333.setContent(
+			html_6be2f65ed6b49999cd9828bac76026a8
 		);
 
-		marker_8e43c3ddaa4b53d6864b2e7af99290a2.bindPopup(
-			popup_60d719fbddd3769317776355353d82ea
+		marker_adda51b23e82fefd35b483e5f359f0c3.bindPopup(
+			popup_7629bfeaffe940ec66d6ff6383dd5333
 		);
 
-		var marker_68b42cfa1a8b648c10df0518ec67a1ee = L.marker(
+		var marker_62775746e98379b706f9ef501c149e30 = L.marker(
 			[42.355244400000004, -71.05693041374465],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_10ccd98fff49a6dad3963c81e0bc8ebc = L.AwesomeMarkers.icon({
+		var icon_088bfed1247ef18b77cb0b4c9b543dae = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "question",
 			iconColor: "white",
 			markerColor: "lightblue",
 			prefix: "fa",
 		});
-		marker_68b42cfa1a8b648c10df0518ec67a1ee.setIcon(
-			icon_10ccd98fff49a6dad3963c81e0bc8ebc
+		marker_62775746e98379b706f9ef501c149e30.setIcon(
+			icon_088bfed1247ef18b77cb0b4c9b543dae
 		);
 
-		var popup_fda64cfaeb57a18ce9ca397c4d3da505 = L.popup({ maxWidth: "100%" });
+		var popup_bbc8463e1b7a00d555c5076926fd6ad0 = L.popup({ maxWidth: "100%" });
 
-		var html_c66963ba4796a5e339089865fa6d73ed = $(
-			`<div id="html_c66963ba4796a5e339089865fa6d73ed" style="width: 100.0%; height: 100.0%;">                          <div id="MassHire Downtown Boston Career Center">MassHire Downtown Boston Career Center</div>                                                  </div>`
+		var html_2101136da4673f8393eea25f523c1c2d = $(
+			`<div id="html_2101136da4673f8393eea25f523c1c2d" style="width: 100.0%; height: 100.0%;">                          <div id="MassHire Downtown Boston Career Center">MassHire Downtown Boston Career Center</div>                                                  </div>`
 		)[0];
-		popup_fda64cfaeb57a18ce9ca397c4d3da505.setContent(
-			html_c66963ba4796a5e339089865fa6d73ed
+		popup_bbc8463e1b7a00d555c5076926fd6ad0.setContent(
+			html_2101136da4673f8393eea25f523c1c2d
 		);
 
-		marker_68b42cfa1a8b648c10df0518ec67a1ee.bindPopup(
-			popup_fda64cfaeb57a18ce9ca397c4d3da505
+		marker_62775746e98379b706f9ef501c149e30.bindPopup(
+			popup_bbc8463e1b7a00d555c5076926fd6ad0
 		);
 
-		var marker_2687461257f81e8f840bb5ea7a178207 = L.marker(
+		var marker_1504a0cb6fd7740a76673274c440650c = L.marker(
 			[42.37005765, -71.04019203482005],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_243e0bb71726019ac14eccabfd01eac1 = L.AwesomeMarkers.icon({
+		var icon_a842debdc998db62eb7d078671dd7fc4 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "bowl-food",
 			iconColor: "white",
 			markerColor: "red",
 			prefix: "fa",
 		});
-		marker_2687461257f81e8f840bb5ea7a178207.setIcon(
-			icon_243e0bb71726019ac14eccabfd01eac1
+		marker_1504a0cb6fd7740a76673274c440650c.setIcon(
+			icon_a842debdc998db62eb7d078671dd7fc4
 		);
 
-		var popup_5c9a917c7ee787ce15aced64a5f9330f = L.popup({ maxWidth: "100%" });
+		var popup_d66d376da7685da65faf54a7e4d739c0 = L.popup({ maxWidth: "100%" });
 
-		var html_0dd970d15e936312909f48f14f0e8a3f = $(
-			`<div id="html_0dd970d15e936312909f48f14f0e8a3f" style="width: 100.0%; height: 100.0%;">                          <div id="East Boston Community Soup Kitchen">East Boston Community Soup Kitchen</div>                                                  </div>`
+		var html_72a0a592b66791e589d41c99e6697490 = $(
+			`<div id="html_72a0a592b66791e589d41c99e6697490" style="width: 100.0%; height: 100.0%;">                          <div id="East Boston Community Soup Kitchen">East Boston Community Soup Kitchen</div>                                                  </div>`
 		)[0];
-		popup_5c9a917c7ee787ce15aced64a5f9330f.setContent(
-			html_0dd970d15e936312909f48f14f0e8a3f
+		popup_d66d376da7685da65faf54a7e4d739c0.setContent(
+			html_72a0a592b66791e589d41c99e6697490
 		);
 
-		marker_2687461257f81e8f840bb5ea7a178207.bindPopup(
-			popup_5c9a917c7ee787ce15aced64a5f9330f
+		marker_1504a0cb6fd7740a76673274c440650c.bindPopup(
+			popup_d66d376da7685da65faf54a7e4d739c0
 		);
 
-		var marker_d332eec366be6e5d31f3e6c62a5cfc96 = L.marker(
+		var marker_c03087974fe4735bd3139eca2c90cfb2 = L.marker(
 			[42.29881085, -71.12991123203847],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_7c7b0394571229fcc8201e9d9598607e = L.AwesomeMarkers.icon({
+		var icon_1f36d0269e135d1164ed68278632a73d = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "bowl-food",
 			iconColor: "white",
 			markerColor: "red",
 			prefix: "fa",
 		});
-		marker_d332eec366be6e5d31f3e6c62a5cfc96.setIcon(
-			icon_7c7b0394571229fcc8201e9d9598607e
+		marker_c03087974fe4735bd3139eca2c90cfb2.setIcon(
+			icon_1f36d0269e135d1164ed68278632a73d
 		);
 
-		var popup_5e0cc82c0bd9e67d0723b0dde74c2ca0 = L.popup({ maxWidth: "100%" });
+		var popup_3927cf3b001fb618c38953c9c6d8b179 = L.popup({ maxWidth: "100%" });
 
-		var html_816e4c96530186ad84648052556a2b9a = $(
-			`<div id="html_816e4c96530186ad84648052556a2b9a" style="width: 100.0%; height: 100.0%;">                          <div id="Roslindale Food Collective">Roslindale Food Collective</div>                                                  </div>`
+		var html_a6ecd12231f88aaad72ea90f0f91e85d = $(
+			`<div id="html_a6ecd12231f88aaad72ea90f0f91e85d" style="width: 100.0%; height: 100.0%;">                          <div id="Roslindale Food Collective">Roslindale Food Collective</div>                                                  </div>`
 		)[0];
-		popup_5e0cc82c0bd9e67d0723b0dde74c2ca0.setContent(
-			html_816e4c96530186ad84648052556a2b9a
+		popup_3927cf3b001fb618c38953c9c6d8b179.setContent(
+			html_a6ecd12231f88aaad72ea90f0f91e85d
 		);
 
-		marker_d332eec366be6e5d31f3e6c62a5cfc96.bindPopup(
-			popup_5e0cc82c0bd9e67d0723b0dde74c2ca0
+		marker_c03087974fe4735bd3139eca2c90cfb2.bindPopup(
+			popup_3927cf3b001fb618c38953c9c6d8b179
 		);
 
-		var marker_c5816917d3b74598de85f45b5c52c22f = L.marker(
+		var marker_f88c9082642a42e12827f85bcb54c395 = L.marker(
 			[42.30819395, -71.06204429421979],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_8d228d54d7d61919488f0320487301e1 = L.AwesomeMarkers.icon({
+		var icon_3398ee9e33d4b2dc72f852f3e77052b7 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "bowl-food",
 			iconColor: "white",
 			markerColor: "red",
 			prefix: "fa",
 		});
-		marker_c5816917d3b74598de85f45b5c52c22f.setIcon(
-			icon_8d228d54d7d61919488f0320487301e1
+		marker_f88c9082642a42e12827f85bcb54c395.setIcon(
+			icon_3398ee9e33d4b2dc72f852f3e77052b7
 		);
 
-		var popup_4aa54a9e3f2c7ad44977401d9c8135ff = L.popup({ maxWidth: "100%" });
+		var popup_e826969dea42ce0bfd767e93d310f0fd = L.popup({ maxWidth: "100%" });
 
-		var html_1e4b145fd125a2bfe05d782b153ce877 = $(
-			`<div id="html_1e4b145fd125a2bfe05d782b153ce877" style="width: 100.0%; height: 100.0%;">                          <div id="Fair Foods: First Parish Church">Fair Foods: First Parish Church</div>                                                  </div>`
+		var html_03c0e12832d126b441ff0a58418e21e1 = $(
+			`<div id="html_03c0e12832d126b441ff0a58418e21e1" style="width: 100.0%; height: 100.0%;">                          <div id="Fair Foods: First Parish Church">Fair Foods: First Parish Church</div>                                                  </div>`
 		)[0];
-		popup_4aa54a9e3f2c7ad44977401d9c8135ff.setContent(
-			html_1e4b145fd125a2bfe05d782b153ce877
+		popup_e826969dea42ce0bfd767e93d310f0fd.setContent(
+			html_03c0e12832d126b441ff0a58418e21e1
 		);
 
-		marker_c5816917d3b74598de85f45b5c52c22f.bindPopup(
-			popup_4aa54a9e3f2c7ad44977401d9c8135ff
+		marker_f88c9082642a42e12827f85bcb54c395.bindPopup(
+			popup_e826969dea42ce0bfd767e93d310f0fd
 		);
 
-		var marker_ad92316eb1d6a2e4558dffce96dfa26e = L.marker(
+		var marker_0bc2b5311593d86b49b3f6c30fecdb12 = L.marker(
 			[42.3584799, -71.0618133],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_603ca97596e6f2ffe93444c8ae65f37a = L.AwesomeMarkers.icon({
+		var icon_547b2dad829b8ccf22457a02a4c91a5a = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "gavel",
 			iconColor: "white",
 			markerColor: "orange",
 			prefix: "fa",
 		});
-		marker_ad92316eb1d6a2e4558dffce96dfa26e.setIcon(
-			icon_603ca97596e6f2ffe93444c8ae65f37a
+		marker_0bc2b5311593d86b49b3f6c30fecdb12.setIcon(
+			icon_547b2dad829b8ccf22457a02a4c91a5a
 		);
 
-		var popup_ac7a568e56f7829eaa1aedb19a603b7a = L.popup({ maxWidth: "100%" });
+		var popup_e2d6b0fe0ffd21d0b7a21ebbc0560308 = L.popup({ maxWidth: "100%" });
 
-		var html_b2113156b3d0343f0b63c5584f7054f1 = $(
-			`<div id="html_b2113156b3d0343f0b63c5584f7054f1" style="width: 100.0%; height: 100.0%;">                          <div id="Project Citizenship">Project Citizenship</div>                                                  </div>`
+		var html_dd21b006c8a14c9ba3d2c96a640cbed0 = $(
+			`<div id="html_dd21b006c8a14c9ba3d2c96a640cbed0" style="width: 100.0%; height: 100.0%;">                          <div id="Project Citizenship">Project Citizenship</div>                                                  </div>`
 		)[0];
-		popup_ac7a568e56f7829eaa1aedb19a603b7a.setContent(
-			html_b2113156b3d0343f0b63c5584f7054f1
+		popup_e2d6b0fe0ffd21d0b7a21ebbc0560308.setContent(
+			html_dd21b006c8a14c9ba3d2c96a640cbed0
 		);
 
-		marker_ad92316eb1d6a2e4558dffce96dfa26e.bindPopup(
-			popup_ac7a568e56f7829eaa1aedb19a603b7a
+		marker_0bc2b5311593d86b49b3f6c30fecdb12.bindPopup(
+			popup_e2d6b0fe0ffd21d0b7a21ebbc0560308
 		);
 
-		var marker_3f5f7b0850859eb665513fc2f9c67414 = L.marker(
+		var marker_feb0a568204976180840f9222b92a293 = L.marker(
 			[42.3304191, -71.0934607062716],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_73911d7d3d512a16602a8d5190b5593e = L.AwesomeMarkers.icon({
+		var icon_e138c4e6b3fc47270c64ea03b236d0a2 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "question",
 			iconColor: "white",
 			markerColor: "lightblue",
 			prefix: "fa",
 		});
-		marker_3f5f7b0850859eb665513fc2f9c67414.setIcon(
-			icon_73911d7d3d512a16602a8d5190b5593e
+		marker_feb0a568204976180840f9222b92a293.setIcon(
+			icon_e138c4e6b3fc47270c64ea03b236d0a2
 		);
 
-		var popup_b565695436118f3077c1a1682aadbdcb = L.popup({ maxWidth: "100%" });
+		var popup_80f78bd0064c9b3563cc2a167d3eed25 = L.popup({ maxWidth: "100%" });
 
-		var html_25d1a7704de28ab461404b75f2541594 = $(
-			`<div id="html_25d1a7704de28ab461404b75f2541594" style="width: 100.0%; height: 100.0%;">                          <div id="Refugee & Immigrant Assistance Center (RIAC)">Refugee & Immigrant Assistance Center (RIAC)</div>                                                  </div>`
+		var html_e6c8e57a410d5f8fd8470f1bcd4d3b33 = $(
+			`<div id="html_e6c8e57a410d5f8fd8470f1bcd4d3b33" style="width: 100.0%; height: 100.0%;">                          <div id="Refugee & Immigrant Assistance Center (RIAC)">Refugee & Immigrant Assistance Center (RIAC)</div>                                                  </div>`
 		)[0];
-		popup_b565695436118f3077c1a1682aadbdcb.setContent(
-			html_25d1a7704de28ab461404b75f2541594
+		popup_80f78bd0064c9b3563cc2a167d3eed25.setContent(
+			html_e6c8e57a410d5f8fd8470f1bcd4d3b33
 		);
 
-		marker_3f5f7b0850859eb665513fc2f9c67414.bindPopup(
-			popup_b565695436118f3077c1a1682aadbdcb
+		marker_feb0a568204976180840f9222b92a293.bindPopup(
+			popup_80f78bd0064c9b3563cc2a167d3eed25
 		);
 
-		var marker_ac478922e0315551f05ea2e329a55d13 = L.marker(
+		var marker_c59b8550d7ecf693bf6100af63c8cec0 = L.marker(
 			[42.3528338, -71.0624254],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_0f7500f32be06696d7df75e409c7976e = L.AwesomeMarkers.icon({
+		var icon_782ede0b4c5204d5b1ab32c2f48679d5 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			iconColor: "white",
 			markerColor: "darkred",
 			prefix: "fa",
 		});
-		marker_ac478922e0315551f05ea2e329a55d13.setIcon(
-			icon_0f7500f32be06696d7df75e409c7976e
+		marker_c59b8550d7ecf693bf6100af63c8cec0.setIcon(
+			icon_782ede0b4c5204d5b1ab32c2f48679d5
 		);
 
-		var popup_ba496f65e8a4f7f25162f3d1e13a9800 = L.popup({ maxWidth: "100%" });
+		var popup_4240313eff3c872bb08c97aa5d7b3dcb = L.popup({ maxWidth: "100%" });
 
-		var html_f7260554584f999ee24791d46d05d8d5 = $(
-			`<div id="html_f7260554584f999ee24791d46d05d8d5" style="width: 100.0%; height: 100.0%;">                          <div id="Mass Office for Refugees and Immigrants (ORI)">Mass Office for Refugees and Immigrants (ORI)</div>                                                  </div>`
+		var html_bfedbffd0f4e05dc7cbe37a619b079a9 = $(
+			`<div id="html_bfedbffd0f4e05dc7cbe37a619b079a9" style="width: 100.0%; height: 100.0%;">                          <div id="Mass Office for Refugees and Immigrants (ORI)">Mass Office for Refugees and Immigrants (ORI)</div>                                                  </div>`
 		)[0];
-		popup_ba496f65e8a4f7f25162f3d1e13a9800.setContent(
-			html_f7260554584f999ee24791d46d05d8d5
+		popup_4240313eff3c872bb08c97aa5d7b3dcb.setContent(
+			html_bfedbffd0f4e05dc7cbe37a619b079a9
 		);
 
-		marker_ac478922e0315551f05ea2e329a55d13.bindPopup(
-			popup_ba496f65e8a4f7f25162f3d1e13a9800
+		marker_c59b8550d7ecf693bf6100af63c8cec0.bindPopup(
+			popup_4240313eff3c872bb08c97aa5d7b3dcb
 		);
 
-		var marker_93fb1c878ca81ed48c4d4c6724592718 = L.marker(
+		var marker_ff72edffde3a733454572eaa4c062b4e = L.marker(
 			[42.3584799, -71.0618133],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_da421683f5871f26143e4fbfebd519c9 = L.AwesomeMarkers.icon({
+		var icon_b583538b70aae6cdfd884ac82bd2e882 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "gavel",
 			iconColor: "white",
 			markerColor: "orange",
 			prefix: "fa",
 		});
-		marker_93fb1c878ca81ed48c4d4c6724592718.setIcon(
-			icon_da421683f5871f26143e4fbfebd519c9
+		marker_ff72edffde3a733454572eaa4c062b4e.setIcon(
+			icon_b583538b70aae6cdfd884ac82bd2e882
 		);
 
-		var popup_b2a25eca2f093e60a3b42d60b51fbb3e = L.popup({ maxWidth: "100%" });
+		var popup_f13ec80951ddb19d213289a99a54de10 = L.popup({ maxWidth: "100%" });
 
-		var html_523fb149d38661162684e4b5494249f7 = $(
-			`<div id="html_523fb149d38661162684e4b5494249f7" style="width: 100.0%; height: 100.0%;">                          <div id="Kids in Need of Defense (KIND)">Kids in Need of Defense (KIND)</div>                                                  </div>`
+		var html_f2691840a83520557aa70a2733fe007f = $(
+			`<div id="html_f2691840a83520557aa70a2733fe007f" style="width: 100.0%; height: 100.0%;">                          <div id="Kids in Need of Defense (KIND)">Kids in Need of Defense (KIND)</div>                                                  </div>`
 		)[0];
-		popup_b2a25eca2f093e60a3b42d60b51fbb3e.setContent(
-			html_523fb149d38661162684e4b5494249f7
+		popup_f13ec80951ddb19d213289a99a54de10.setContent(
+			html_f2691840a83520557aa70a2733fe007f
 		);
 
-		marker_93fb1c878ca81ed48c4d4c6724592718.bindPopup(
-			popup_b2a25eca2f093e60a3b42d60b51fbb3e
+		marker_ff72edffde3a733454572eaa4c062b4e.bindPopup(
+			popup_f13ec80951ddb19d213289a99a54de10
 		);
 
-		var marker_fb4362846938b6249d1707c211eff714 = L.marker(
+		var marker_2826885dd003ab4702c6ea0f587b288a = L.marker(
 			[42.333645250000004, -71.07279114401811],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_b87e29261a45cc4d80397741717ebcf6 = L.AwesomeMarkers.icon({
+		var icon_89c517c8019ffe99d25c550e614de10d = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_fb4362846938b6249d1707c211eff714.setIcon(
-			icon_b87e29261a45cc4d80397741717ebcf6
+		marker_2826885dd003ab4702c6ea0f587b288a.setIcon(
+			icon_89c517c8019ffe99d25c550e614de10d
 		);
 
-		var popup_0f34e893d89e7a45ec2771fe7d44669d = L.popup({ maxWidth: "100%" });
+		var popup_cfd1cd38c7cb820b2a346ad271aa8d5c = L.popup({ maxWidth: "100%" });
 
-		var html_c2aba974c2853fb5e1afc4c384e874c0 = $(
-			`<div id="html_c2aba974c2853fb5e1afc4c384e874c0" style="width: 100.0%; height: 100.0%;">                          <div id="Boston Healthcare for the Homeless">Boston Healthcare for the Homeless</div>                                                  </div>`
+		var html_ee9705e392e3e77b3c39d719c328777d = $(
+			`<div id="html_ee9705e392e3e77b3c39d719c328777d" style="width: 100.0%; height: 100.0%;">                          <div id="Boston Healthcare for the Homeless">Boston Healthcare for the Homeless</div>                                                  </div>`
 		)[0];
-		popup_0f34e893d89e7a45ec2771fe7d44669d.setContent(
-			html_c2aba974c2853fb5e1afc4c384e874c0
+		popup_cfd1cd38c7cb820b2a346ad271aa8d5c.setContent(
+			html_ee9705e392e3e77b3c39d719c328777d
 		);
 
-		marker_fb4362846938b6249d1707c211eff714.bindPopup(
-			popup_0f34e893d89e7a45ec2771fe7d44669d
+		marker_2826885dd003ab4702c6ea0f587b288a.bindPopup(
+			popup_cfd1cd38c7cb820b2a346ad271aa8d5c
 		);
 
-		var marker_f9f9bc86ff3628f8bda3734d6e59fc94 = L.marker(
+		var marker_bd9cb0c109a2e4cc0d3689e0131a33bd = L.marker(
 			[42.37535, -71.0384632],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_3322ee96ff0d628f811f3fcd00ae03dc = L.AwesomeMarkers.icon({
+		var icon_c04d86a64bcadd71e660bf405356aba6 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "book",
 			iconColor: "white",
 			markerColor: "green",
 			prefix: "fa",
 		});
-		marker_f9f9bc86ff3628f8bda3734d6e59fc94.setIcon(
-			icon_3322ee96ff0d628f811f3fcd00ae03dc
+		marker_bd9cb0c109a2e4cc0d3689e0131a33bd.setIcon(
+			icon_c04d86a64bcadd71e660bf405356aba6
 		);
 
-		var popup_77da62859acf7e7ecc79ba0565ec9212 = L.popup({ maxWidth: "100%" });
+		var popup_a380958e6db8eabae07c1e2bd4e8c8ea = L.popup({ maxWidth: "100%" });
 
-		var html_67727f01d93a41142da31fd287f196ff = $(
-			`<div id="html_67727f01d93a41142da31fd287f196ff" style="width: 100.0%; height: 100.0%;">                          <div id="Centro Presente">Centro Presente</div>                                                  </div>`
+		var html_2a2f45569a637c1c0d46412ea4cb0e9a = $(
+			`<div id="html_2a2f45569a637c1c0d46412ea4cb0e9a" style="width: 100.0%; height: 100.0%;">                          <div id="Centro Presente">Centro Presente</div>                                                  </div>`
 		)[0];
-		popup_77da62859acf7e7ecc79ba0565ec9212.setContent(
-			html_67727f01d93a41142da31fd287f196ff
+		popup_a380958e6db8eabae07c1e2bd4e8c8ea.setContent(
+			html_2a2f45569a637c1c0d46412ea4cb0e9a
 		);
 
-		marker_f9f9bc86ff3628f8bda3734d6e59fc94.bindPopup(
-			popup_77da62859acf7e7ecc79ba0565ec9212
+		marker_bd9cb0c109a2e4cc0d3689e0131a33bd.bindPopup(
+			popup_a380958e6db8eabae07c1e2bd4e8c8ea
 		);
 
-		var marker_46b7b92da4c947ad7aefbc8275f3e365 = L.marker(
+		var marker_d27aeefd8e9aa696a9a317b7012a49a5 = L.marker(
 			[42.33442875, -71.07409438940437],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_251da46e263a5bc77a03189a3c29726d = L.AwesomeMarkers.icon({
+		var icon_4d2a3aa3b1e7afb425ae636fd1b7d428 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_46b7b92da4c947ad7aefbc8275f3e365.setIcon(
-			icon_251da46e263a5bc77a03189a3c29726d
+		marker_d27aeefd8e9aa696a9a317b7012a49a5.setIcon(
+			icon_4d2a3aa3b1e7afb425ae636fd1b7d428
 		);
 
-		var popup_66fc53a1d725a5ac4d2b9a28ba97ba05 = L.popup({ maxWidth: "100%" });
+		var popup_9140318267ff76edd937d479b5aa927c = L.popup({ maxWidth: "100%" });
 
-		var html_41ce6718831e2fd85ac9ca0571cde95c = $(
-			`<div id="html_41ce6718831e2fd85ac9ca0571cde95c" style="width: 100.0%; height: 100.0%;">                          <div id="Boston Center for Refugee Health & Human Rights (program of Immigrant and Refugee Health Center at Boston Medical Center)">Boston Center for Refugee Health & Human Rights (program of Immigrant and Refugee Health Center at Boston Medical Center)</div>                                                  </div>`
+		var html_f3a57fcf9668d560244d11f1c5e579ce = $(
+			`<div id="html_f3a57fcf9668d560244d11f1c5e579ce" style="width: 100.0%; height: 100.0%;">                          <div id="Boston Center for Refugee Health & Human Rights (program of Immigrant and Refugee Health Center at Boston Medical Center)">Boston Center for Refugee Health & Human Rights (program of Immigrant and Refugee Health Center at Boston Medical Center)</div>                                                  </div>`
 		)[0];
-		popup_66fc53a1d725a5ac4d2b9a28ba97ba05.setContent(
-			html_41ce6718831e2fd85ac9ca0571cde95c
+		popup_9140318267ff76edd937d479b5aa927c.setContent(
+			html_f3a57fcf9668d560244d11f1c5e579ce
 		);
 
-		marker_46b7b92da4c947ad7aefbc8275f3e365.bindPopup(
-			popup_66fc53a1d725a5ac4d2b9a28ba97ba05
+		marker_d27aeefd8e9aa696a9a317b7012a49a5.bindPopup(
+			popup_9140318267ff76edd937d479b5aa927c
 		);
 
-		var marker_852b414b3567ffd58c3f7ef95ed9d53e = L.marker(
+		var marker_f75958c1ffb0ce72a8b52510aef0c2c0 = L.marker(
 			[42.350943900000004, -71.14607355893482],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_33cc681dd6baa915a0c0ba245b329f36 = L.AwesomeMarkers.icon({
+		var icon_90767dafccde297c73877fc43aff319e = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "gavel",
 			iconColor: "white",
 			markerColor: "orange",
 			prefix: "fa",
 		});
-		marker_852b414b3567ffd58c3f7ef95ed9d53e.setIcon(
-			icon_33cc681dd6baa915a0c0ba245b329f36
+		marker_f75958c1ffb0ce72a8b52510aef0c2c0.setIcon(
+			icon_90767dafccde297c73877fc43aff319e
 		);
 
-		var popup_5bf96c631871f670f92efdb1816c6303 = L.popup({ maxWidth: "100%" });
+		var popup_97f4e33040234c3c62804c7ea6e438fd = L.popup({ maxWidth: "100%" });
 
-		var html_3954f45d404b8e288f405f3d1b4f37de = $(
-			`<div id="html_3954f45d404b8e288f405f3d1b4f37de" style="width: 100.0%; height: 100.0%;">                          <div id="Massachusetts Alliance of Portuguese Speakers (MAPS)">Massachusetts Alliance of Portuguese Speakers (MAPS)</div>                                                  </div>`
+		var html_d92ecd7772862a3a8374596cd7abbe59 = $(
+			`<div id="html_d92ecd7772862a3a8374596cd7abbe59" style="width: 100.0%; height: 100.0%;">                          <div id="Massachusetts Alliance of Portuguese Speakers (MAPS)">Massachusetts Alliance of Portuguese Speakers (MAPS)</div>                                                  </div>`
 		)[0];
-		popup_5bf96c631871f670f92efdb1816c6303.setContent(
-			html_3954f45d404b8e288f405f3d1b4f37de
+		popup_97f4e33040234c3c62804c7ea6e438fd.setContent(
+			html_d92ecd7772862a3a8374596cd7abbe59
 		);
 
-		marker_852b414b3567ffd58c3f7ef95ed9d53e.bindPopup(
-			popup_5bf96c631871f670f92efdb1816c6303
+		marker_f75958c1ffb0ce72a8b52510aef0c2c0.bindPopup(
+			popup_97f4e33040234c3c62804c7ea6e438fd
 		);
 
-		var marker_91e0f9ec214332143b02b693494b6620 = L.marker(
+		var marker_3e2b15095485b67f788028016ee53bc0 = L.marker(
 			[42.334405149999995, -71.06583269114233],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_05c44a7ad2aeba98438e175eae825874 = L.AwesomeMarkers.icon({
+		var icon_cdda461c16966a3c6e11b4ac4eebca29 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "bowl-food",
 			iconColor: "white",
 			markerColor: "red",
 			prefix: "fa",
 		});
-		marker_91e0f9ec214332143b02b693494b6620.setIcon(
-			icon_05c44a7ad2aeba98438e175eae825874
+		marker_3e2b15095485b67f788028016ee53bc0.setIcon(
+			icon_cdda461c16966a3c6e11b4ac4eebca29
 		);
 
-		var popup_7e13152e47fef5442f278f7ba8cfe811 = L.popup({ maxWidth: "100%" });
+		var popup_ba0a9ec0935c2b72b7ccd253481d716a = L.popup({ maxWidth: "100%" });
 
-		var html_96d16775f7164845c6d115f4ead4fc14 = $(
-			`<div id="html_96d16775f7164845c6d115f4ead4fc14" style="width: 100.0%; height: 100.0%;">                          <div id="Greater Boston Food Bank">Greater Boston Food Bank</div>                                                  </div>`
+		var html_8530b087418f2e5023d1820bd5cc5879 = $(
+			`<div id="html_8530b087418f2e5023d1820bd5cc5879" style="width: 100.0%; height: 100.0%;">                          <div id="Greater Boston Food Bank">Greater Boston Food Bank</div>                                                  </div>`
 		)[0];
-		popup_7e13152e47fef5442f278f7ba8cfe811.setContent(
-			html_96d16775f7164845c6d115f4ead4fc14
+		popup_ba0a9ec0935c2b72b7ccd253481d716a.setContent(
+			html_8530b087418f2e5023d1820bd5cc5879
 		);
 
-		marker_91e0f9ec214332143b02b693494b6620.bindPopup(
-			popup_7e13152e47fef5442f278f7ba8cfe811
+		marker_3e2b15095485b67f788028016ee53bc0.bindPopup(
+			popup_ba0a9ec0935c2b72b7ccd253481d716a
 		);
 
-		var marker_fcb3aaec6cf255c0235f5b242a5463d3 = L.marker(
+		var marker_34c3d98d47d89e1f5dec77fdbf9a6730 = L.marker(
 			[42.3552369, -71.1324104],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_5819c0d2759fb1465d2464f1eb54fde5 = L.AwesomeMarkers.icon({
+		var icon_8c80689a9af48dec064461c986911404 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "question",
 			iconColor: "white",
 			markerColor: "lightblue",
 			prefix: "fa",
 		});
-		marker_fcb3aaec6cf255c0235f5b242a5463d3.setIcon(
-			icon_5819c0d2759fb1465d2464f1eb54fde5
+		marker_34c3d98d47d89e1f5dec77fdbf9a6730.setIcon(
+			icon_8c80689a9af48dec064461c986911404
 		);
 
-		var popup_dcc80a3a12914b85dc021e377167969a = L.popup({ maxWidth: "100%" });
+		var popup_294f38f70486914467876c8496d1a0ac = L.popup({ maxWidth: "100%" });
 
-		var html_8670122c5e2394839a3b344edcc5b32f = $(
-			`<div id="html_8670122c5e2394839a3b344edcc5b32f" style="width: 100.0%; height: 100.0%;">                          <div id="Brazillian Worker Center (BWC)">Brazillian Worker Center (BWC)</div>                                                  </div>`
+		var html_52b620f4235be6f4583561c7ce828ebe = $(
+			`<div id="html_52b620f4235be6f4583561c7ce828ebe" style="width: 100.0%; height: 100.0%;">                          <div id="Brazillian Worker Center (BWC)">Brazillian Worker Center (BWC)</div>                                                  </div>`
 		)[0];
-		popup_dcc80a3a12914b85dc021e377167969a.setContent(
-			html_8670122c5e2394839a3b344edcc5b32f
+		popup_294f38f70486914467876c8496d1a0ac.setContent(
+			html_52b620f4235be6f4583561c7ce828ebe
 		);
 
-		marker_fcb3aaec6cf255c0235f5b242a5463d3.bindPopup(
-			popup_dcc80a3a12914b85dc021e377167969a
+		marker_34c3d98d47d89e1f5dec77fdbf9a6730.bindPopup(
+			popup_294f38f70486914467876c8496d1a0ac
 		);
 
-		var marker_27e8499076eabaf04bfe15eb1d58780e = L.marker(
+		var marker_b0a68cb9273ea566ae0eb23b13205e92 = L.marker(
 			[42.3695639, -71.0395795],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_3764de1959e567038544c83c64eb3d66 = L.AwesomeMarkers.icon({
+		var icon_1dc8503b86c796848225d45c256d1c52 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_27e8499076eabaf04bfe15eb1d58780e.setIcon(
-			icon_3764de1959e567038544c83c64eb3d66
+		marker_b0a68cb9273ea566ae0eb23b13205e92.setIcon(
+			icon_1dc8503b86c796848225d45c256d1c52
 		);
 
-		var popup_4e1e1daff1f509f5afaac45f6c0a33ef = L.popup({ maxWidth: "100%" });
+		var popup_ffe0b0879420488e282a68e52eb51f02 = L.popup({ maxWidth: "100%" });
 
-		var html_945502250781165f0be0f3782783c7f3 = $(
-			`<div id="html_945502250781165f0be0f3782783c7f3" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_a9d6439fab3034b866dfc8f1151dc2e4 = $(
+			`<div id="html_a9d6439fab3034b866dfc8f1151dc2e4" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_4e1e1daff1f509f5afaac45f6c0a33ef.setContent(
-			html_945502250781165f0be0f3782783c7f3
+		popup_ffe0b0879420488e282a68e52eb51f02.setContent(
+			html_a9d6439fab3034b866dfc8f1151dc2e4
 		);
 
-		marker_27e8499076eabaf04bfe15eb1d58780e.bindPopup(
-			popup_4e1e1daff1f509f5afaac45f6c0a33ef
+		marker_b0a68cb9273ea566ae0eb23b13205e92.bindPopup(
+			popup_ffe0b0879420488e282a68e52eb51f02
 		);
 
-		var marker_72b432261159e40047fc30cdba189fc6 = L.marker(
+		var marker_dae3847a680cdc4de60d45ba5830fa1e = L.marker(
 			[42.372349, -71.03834271915707],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_d2c3f94e16cefe6d6d5a650f7b77b078 = L.AwesomeMarkers.icon({
+		var icon_8013d0893e1b62aa6cacb52e86ab39b0 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_72b432261159e40047fc30cdba189fc6.setIcon(
-			icon_d2c3f94e16cefe6d6d5a650f7b77b078
+		marker_dae3847a680cdc4de60d45ba5830fa1e.setIcon(
+			icon_8013d0893e1b62aa6cacb52e86ab39b0
 		);
 
-		var popup_986d72f0f6b6cf55068d7a3970e28473 = L.popup({ maxWidth: "100%" });
+		var popup_cb7cd03ae9e37ba6f7bc45d67866fd25 = L.popup({ maxWidth: "100%" });
 
-		var html_5f7c204e361600aab022a2b1c26a0a06 = $(
-			`<div id="html_5f7c204e361600aab022a2b1c26a0a06" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_7be8c158684350911f721b3ae7905059 = $(
+			`<div id="html_7be8c158684350911f721b3ae7905059" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_986d72f0f6b6cf55068d7a3970e28473.setContent(
-			html_5f7c204e361600aab022a2b1c26a0a06
+		popup_cb7cd03ae9e37ba6f7bc45d67866fd25.setContent(
+			html_7be8c158684350911f721b3ae7905059
 		);
 
-		marker_72b432261159e40047fc30cdba189fc6.bindPopup(
-			popup_986d72f0f6b6cf55068d7a3970e28473
+		marker_dae3847a680cdc4de60d45ba5830fa1e.bindPopup(
+			popup_cb7cd03ae9e37ba6f7bc45d67866fd25
 		);
 
-		var marker_e4a1f7deb5da1b80dce2eda1afe53198 = L.marker(
+		var marker_0307e7a34f40eb95c5f00651c0f9d498 = L.marker(
 			[42.37287548979592, -71.03680240816327],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_742640d5f5fc4d8d5c2cba609830a87c = L.AwesomeMarkers.icon({
+		var icon_476e927d79a33949f1542ec3fa51a3e2 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_e4a1f7deb5da1b80dce2eda1afe53198.setIcon(
-			icon_742640d5f5fc4d8d5c2cba609830a87c
+		marker_0307e7a34f40eb95c5f00651c0f9d498.setIcon(
+			icon_476e927d79a33949f1542ec3fa51a3e2
 		);
 
-		var popup_c5fe65e6993ab7fa90f3910d63822f7c = L.popup({ maxWidth: "100%" });
+		var popup_e133f39a207e9ccf56aa9276c0f96693 = L.popup({ maxWidth: "100%" });
 
-		var html_fcf518750197e7a239ad9a9ee1552e67 = $(
-			`<div id="html_fcf518750197e7a239ad9a9ee1552e67" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_b1f241e9e68b47cb73545e1ae5775cf1 = $(
+			`<div id="html_b1f241e9e68b47cb73545e1ae5775cf1" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_c5fe65e6993ab7fa90f3910d63822f7c.setContent(
-			html_fcf518750197e7a239ad9a9ee1552e67
+		popup_e133f39a207e9ccf56aa9276c0f96693.setContent(
+			html_b1f241e9e68b47cb73545e1ae5775cf1
 		);
 
-		marker_e4a1f7deb5da1b80dce2eda1afe53198.bindPopup(
-			popup_c5fe65e6993ab7fa90f3910d63822f7c
+		marker_0307e7a34f40eb95c5f00651c0f9d498.bindPopup(
+			popup_e133f39a207e9ccf56aa9276c0f96693
 		);
 
-		var marker_8e91130943fb4c95941cb685e30fe6c4 = L.marker(
+		var marker_88cc0bf8cecce3396ff77c2624f9df9f = L.marker(
 			[42.368416, -71.038489],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_8f3fd9f0fbe93b5af7e4c7ccd7ff93ed = L.AwesomeMarkers.icon({
+		var icon_4ed55388b3be089048daa22a3713a651 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_8e91130943fb4c95941cb685e30fe6c4.setIcon(
-			icon_8f3fd9f0fbe93b5af7e4c7ccd7ff93ed
+		marker_88cc0bf8cecce3396ff77c2624f9df9f.setIcon(
+			icon_4ed55388b3be089048daa22a3713a651
 		);
 
-		var popup_c1110922746e5a9b619e8271f621d2bc = L.popup({ maxWidth: "100%" });
+		var popup_c1275445a2bc869887e1c1406c0ff3de = L.popup({ maxWidth: "100%" });
 
-		var html_9676a734404099f9f9507d3d46cccc17 = $(
-			`<div id="html_9676a734404099f9f9507d3d46cccc17" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_28663eb7f47526a2fe0b447a3fb414f3 = $(
+			`<div id="html_28663eb7f47526a2fe0b447a3fb414f3" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_c1110922746e5a9b619e8271f621d2bc.setContent(
-			html_9676a734404099f9f9507d3d46cccc17
+		popup_c1275445a2bc869887e1c1406c0ff3de.setContent(
+			html_28663eb7f47526a2fe0b447a3fb414f3
 		);
 
-		marker_8e91130943fb4c95941cb685e30fe6c4.bindPopup(
-			popup_c1110922746e5a9b619e8271f621d2bc
+		marker_88cc0bf8cecce3396ff77c2624f9df9f.bindPopup(
+			popup_c1275445a2bc869887e1c1406c0ff3de
 		);
 
-		var marker_43163a824221f0b7bdf3911236ae060a = L.marker(
+		var marker_4962fda3d4ff73be769843c1539fba0d = L.marker(
 			[42.376546950000005, -71.03944463124805],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_6d14f55d20b46e465a971ed6b9979d30 = L.AwesomeMarkers.icon({
+		var icon_fc0497d4809391ef78015bb889e58d2d = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_43163a824221f0b7bdf3911236ae060a.setIcon(
-			icon_6d14f55d20b46e465a971ed6b9979d30
+		marker_4962fda3d4ff73be769843c1539fba0d.setIcon(
+			icon_fc0497d4809391ef78015bb889e58d2d
 		);
 
-		var popup_7f320a53c8da5236093e0adc2d83d41e = L.popup({ maxWidth: "100%" });
+		var popup_598afc1b392980a2bde841c07aae8af6 = L.popup({ maxWidth: "100%" });
 
-		var html_317ed88a292efad209f8d7453da8ea5a = $(
-			`<div id="html_317ed88a292efad209f8d7453da8ea5a" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_5a6eed6741fa1bf9bfa2d4b274fcb704 = $(
+			`<div id="html_5a6eed6741fa1bf9bfa2d4b274fcb704" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_7f320a53c8da5236093e0adc2d83d41e.setContent(
-			html_317ed88a292efad209f8d7453da8ea5a
+		popup_598afc1b392980a2bde841c07aae8af6.setContent(
+			html_5a6eed6741fa1bf9bfa2d4b274fcb704
 		);
 
-		marker_43163a824221f0b7bdf3911236ae060a.bindPopup(
-			popup_7f320a53c8da5236093e0adc2d83d41e
+		marker_4962fda3d4ff73be769843c1539fba0d.bindPopup(
+			popup_598afc1b392980a2bde841c07aae8af6
 		);
 
-		var marker_01d23e0a3a6e51592ddaee1c381b55fa = L.marker(
+		var marker_259946912137d0feff58a2b358fab25e = L.marker(
 			[42.370199771428574, -71.03577271428571],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_135f722558a3e4fdcd9d689dfc278904 = L.AwesomeMarkers.icon({
+		var icon_dc3ed3c8ced3d417f065694f9e11b383 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_01d23e0a3a6e51592ddaee1c381b55fa.setIcon(
-			icon_135f722558a3e4fdcd9d689dfc278904
+		marker_259946912137d0feff58a2b358fab25e.setIcon(
+			icon_dc3ed3c8ced3d417f065694f9e11b383
 		);
 
-		var popup_195e16f96c2d767f1fe2d40929b6e1db = L.popup({ maxWidth: "100%" });
+		var popup_f306eeec05fe45a06b298cfeae37c595 = L.popup({ maxWidth: "100%" });
 
-		var html_ae50d9cf11c872c5fbd55fa207ae7bdd = $(
-			`<div id="html_ae50d9cf11c872c5fbd55fa207ae7bdd" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_cb72238f106e497cb646177501918abf = $(
+			`<div id="html_cb72238f106e497cb646177501918abf" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_195e16f96c2d767f1fe2d40929b6e1db.setContent(
-			html_ae50d9cf11c872c5fbd55fa207ae7bdd
+		popup_f306eeec05fe45a06b298cfeae37c595.setContent(
+			html_cb72238f106e497cb646177501918abf
 		);
 
-		marker_01d23e0a3a6e51592ddaee1c381b55fa.bindPopup(
-			popup_195e16f96c2d767f1fe2d40929b6e1db
+		marker_259946912137d0feff58a2b358fab25e.bindPopup(
+			popup_f306eeec05fe45a06b298cfeae37c595
 		);
 
-		var marker_f584e1e31c8b8df61a76497b37d5c277 = L.marker(
+		var marker_5347073856ceacd82e402487f2e80a3c = L.marker(
 			[42.38493565, -71.01529129873144],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_939d3f5cce3b5c9d4fcd3650ee58c352 = L.AwesomeMarkers.icon({
+		var icon_db9504c70b18b817f99576099e37b912 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_f584e1e31c8b8df61a76497b37d5c277.setIcon(
-			icon_939d3f5cce3b5c9d4fcd3650ee58c352
+		marker_5347073856ceacd82e402487f2e80a3c.setIcon(
+			icon_db9504c70b18b817f99576099e37b912
 		);
 
-		var popup_d45f6569b9db6c27fb6568c54aedbeb1 = L.popup({ maxWidth: "100%" });
+		var popup_faedbac1f03d0eeef2f684e60983813e = L.popup({ maxWidth: "100%" });
 
-		var html_feb7a33098f1baec9c51c124b6a25e3f = $(
-			`<div id="html_feb7a33098f1baec9c51c124b6a25e3f" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_2b7a6117afa98b590283c8e9ef66064d = $(
+			`<div id="html_2b7a6117afa98b590283c8e9ef66064d" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_d45f6569b9db6c27fb6568c54aedbeb1.setContent(
-			html_feb7a33098f1baec9c51c124b6a25e3f
+		popup_faedbac1f03d0eeef2f684e60983813e.setContent(
+			html_2b7a6117afa98b590283c8e9ef66064d
 		);
 
-		marker_f584e1e31c8b8df61a76497b37d5c277.bindPopup(
-			popup_d45f6569b9db6c27fb6568c54aedbeb1
+		marker_5347073856ceacd82e402487f2e80a3c.bindPopup(
+			popup_faedbac1f03d0eeef2f684e60983813e
 		);
 
-		var marker_8f9d00afe5ecce9f3e8ffdd8d40aa2cb = L.marker(
+		var marker_5e12defcd91420c9209e645bb026a66c = L.marker(
 			[42.3685584, -71.0394796237491],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_d86bfcc39712f3c6d7af5caf9c35a57f = L.AwesomeMarkers.icon({
+		var icon_2917574bc6a19b13ee85b1424885ad57 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_8f9d00afe5ecce9f3e8ffdd8d40aa2cb.setIcon(
-			icon_d86bfcc39712f3c6d7af5caf9c35a57f
+		marker_5e12defcd91420c9209e645bb026a66c.setIcon(
+			icon_2917574bc6a19b13ee85b1424885ad57
 		);
 
-		var popup_a601a395f30d83378414bbc44628dd0f = L.popup({ maxWidth: "100%" });
+		var popup_1c126920d6759066343d2b651d499204 = L.popup({ maxWidth: "100%" });
 
-		var html_7ecc5ab09848101d52077a3177295c64 = $(
-			`<div id="html_7ecc5ab09848101d52077a3177295c64" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_c4a8586fe7096a07f38610124d352798 = $(
+			`<div id="html_c4a8586fe7096a07f38610124d352798" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_a601a395f30d83378414bbc44628dd0f.setContent(
-			html_7ecc5ab09848101d52077a3177295c64
+		popup_1c126920d6759066343d2b651d499204.setContent(
+			html_c4a8586fe7096a07f38610124d352798
 		);
 
-		marker_8f9d00afe5ecce9f3e8ffdd8d40aa2cb.bindPopup(
-			popup_a601a395f30d83378414bbc44628dd0f
+		marker_5e12defcd91420c9209e645bb026a66c.bindPopup(
+			popup_1c126920d6759066343d2b651d499204
 		);
 
-		var marker_aa7fc96f45568fbfe781867bffdaf5c8 = L.marker(
+		var marker_7e19e790a39a91976aa53a33231155ae = L.marker(
 			[42.272591, -71.0695202],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_6feb9f8e21970c1f42b3cf41bf0990f5 = L.AwesomeMarkers.icon({
+		var icon_feea34fc75dfa7a1e7dd5df931a1141a = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_aa7fc96f45568fbfe781867bffdaf5c8.setIcon(
-			icon_6feb9f8e21970c1f42b3cf41bf0990f5
+		marker_7e19e790a39a91976aa53a33231155ae.setIcon(
+			icon_feea34fc75dfa7a1e7dd5df931a1141a
 		);
 
-		var popup_4d0bcd5211b8851fdc2d2f57a1cfc350 = L.popup({ maxWidth: "100%" });
+		var popup_b0d56446af8d252d568faec9c70ae8ac = L.popup({ maxWidth: "100%" });
 
-		var html_33568dc5899498fc13e12ba3483cb735 = $(
-			`<div id="html_33568dc5899498fc13e12ba3483cb735" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_c35285e31de2e276216cbfa58610c63c = $(
+			`<div id="html_c35285e31de2e276216cbfa58610c63c" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_4d0bcd5211b8851fdc2d2f57a1cfc350.setContent(
-			html_33568dc5899498fc13e12ba3483cb735
+		popup_b0d56446af8d252d568faec9c70ae8ac.setContent(
+			html_c35285e31de2e276216cbfa58610c63c
 		);
 
-		marker_aa7fc96f45568fbfe781867bffdaf5c8.bindPopup(
-			popup_4d0bcd5211b8851fdc2d2f57a1cfc350
+		marker_7e19e790a39a91976aa53a33231155ae.bindPopup(
+			popup_b0d56446af8d252d568faec9c70ae8ac
 		);
 
-		var marker_143037f0d7c4254821f28a774ea1bcaa = L.marker(
+		var marker_6e485183790e46a5cb400997bff55b99 = L.marker(
 			[42.342197, -71.0705082],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_8ef22465df2ded15408f33b61c759abb = L.AwesomeMarkers.icon({
+		var icon_40154b3a55d2e82e41e0fc0929d5bc26 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_143037f0d7c4254821f28a774ea1bcaa.setIcon(
-			icon_8ef22465df2ded15408f33b61c759abb
+		marker_6e485183790e46a5cb400997bff55b99.setIcon(
+			icon_40154b3a55d2e82e41e0fc0929d5bc26
 		);
 
-		var popup_166d6a3acaf4d88834515322505ad4be = L.popup({ maxWidth: "100%" });
+		var popup_5d00373e8a20f20c890cb17197c3f8c1 = L.popup({ maxWidth: "100%" });
 
-		var html_04660ff2ceeb0c601a1632ddf497e158 = $(
-			`<div id="html_04660ff2ceeb0c601a1632ddf497e158" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_59ee1a83073ebf2920bdc36c779045ee = $(
+			`<div id="html_59ee1a83073ebf2920bdc36c779045ee" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_166d6a3acaf4d88834515322505ad4be.setContent(
-			html_04660ff2ceeb0c601a1632ddf497e158
+		popup_5d00373e8a20f20c890cb17197c3f8c1.setContent(
+			html_59ee1a83073ebf2920bdc36c779045ee
 		);
 
-		marker_143037f0d7c4254821f28a774ea1bcaa.bindPopup(
-			popup_166d6a3acaf4d88834515322505ad4be
+		marker_6e485183790e46a5cb400997bff55b99.bindPopup(
+			popup_5d00373e8a20f20c890cb17197c3f8c1
 		);
 
-		var marker_a77a6158d944d16c47b91b432312437d = L.marker(
+		var marker_96a1d60f91164780d959ecb6449d4abf = L.marker(
 			[42.372857, -71.0617174],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_f4009e06543700a8fcf92b3d55149b4b = L.AwesomeMarkers.icon({
+		var icon_3e99176cc0527e203a14fa576b0f3fc4 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_a77a6158d944d16c47b91b432312437d.setIcon(
-			icon_f4009e06543700a8fcf92b3d55149b4b
+		marker_96a1d60f91164780d959ecb6449d4abf.setIcon(
+			icon_3e99176cc0527e203a14fa576b0f3fc4
 		);
 
-		var popup_f5651181a8f1b573d56e0d9ca235608e = L.popup({ maxWidth: "100%" });
+		var popup_b5329707e5343b5a80c9907eb4809293 = L.popup({ maxWidth: "100%" });
 
-		var html_bd81d28af3ebd7e6f3e860816c1c3b48 = $(
-			`<div id="html_bd81d28af3ebd7e6f3e860816c1c3b48" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_c3012dfa9393774d98691834211737ff = $(
+			`<div id="html_c3012dfa9393774d98691834211737ff" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_f5651181a8f1b573d56e0d9ca235608e.setContent(
-			html_bd81d28af3ebd7e6f3e860816c1c3b48
+		popup_b5329707e5343b5a80c9907eb4809293.setContent(
+			html_c3012dfa9393774d98691834211737ff
 		);
 
-		marker_a77a6158d944d16c47b91b432312437d.bindPopup(
-			popup_f5651181a8f1b573d56e0d9ca235608e
+		marker_96a1d60f91164780d959ecb6449d4abf.bindPopup(
+			popup_b5329707e5343b5a80c9907eb4809293
 		);
 
-		var marker_85124ff76ccd5f88f4dca80defb84c16 = L.marker(
+		var marker_2bec7648d3d7c0929a9ccdc9719e4588 = L.marker(
 			[42.3731194, -70.97030840411927],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_2e9ab6d7e06cc2a08b9dca0d76ac76eb = L.AwesomeMarkers.icon({
+		var icon_00796e19346ecc3d1268d5d86f325b1d = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_85124ff76ccd5f88f4dca80defb84c16.setIcon(
-			icon_2e9ab6d7e06cc2a08b9dca0d76ac76eb
+		marker_2bec7648d3d7c0929a9ccdc9719e4588.setIcon(
+			icon_00796e19346ecc3d1268d5d86f325b1d
 		);
 
-		var popup_d66b66b7968690d62997db554f921bd2 = L.popup({ maxWidth: "100%" });
+		var popup_3444193ce6dda05d70696a714dbf1af9 = L.popup({ maxWidth: "100%" });
 
-		var html_8f0cc63503e0c09e1de734c7c0b46ba2 = $(
-			`<div id="html_8f0cc63503e0c09e1de734c7c0b46ba2" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_9b88593ce75fd82932a064047c888ee7 = $(
+			`<div id="html_9b88593ce75fd82932a064047c888ee7" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_d66b66b7968690d62997db554f921bd2.setContent(
-			html_8f0cc63503e0c09e1de734c7c0b46ba2
+		popup_3444193ce6dda05d70696a714dbf1af9.setContent(
+			html_9b88593ce75fd82932a064047c888ee7
 		);
 
-		marker_85124ff76ccd5f88f4dca80defb84c16.bindPopup(
-			popup_d66b66b7968690d62997db554f921bd2
+		marker_2bec7648d3d7c0929a9ccdc9719e4588.bindPopup(
+			popup_3444193ce6dda05d70696a714dbf1af9
 		);
 
-		var marker_6ba2e36c75bee882c0d014d7f7a365b7 = L.marker(
+		var marker_c9b6d11dc660535d54a16616b30a8641 = L.marker(
 			[42.39448, -71.0671816],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_3b2b672a9732f682ae067b60d57972a6 = L.AwesomeMarkers.icon({
+		var icon_aa3e4ddca7c8d55c708353de2fd9d824 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_6ba2e36c75bee882c0d014d7f7a365b7.setIcon(
-			icon_3b2b672a9732f682ae067b60d57972a6
+		marker_c9b6d11dc660535d54a16616b30a8641.setIcon(
+			icon_aa3e4ddca7c8d55c708353de2fd9d824
 		);
 
-		var popup_7df3e3fba41f7b808972e11a5090b825 = L.popup({ maxWidth: "100%" });
+		var popup_d66d3e3d7a9c70cd4bac10ec5941fcff = L.popup({ maxWidth: "100%" });
 
-		var html_4e3b8a2e20108fe1d98781a483db58d7 = $(
-			`<div id="html_4e3b8a2e20108fe1d98781a483db58d7" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_412a0985d0cadf8640f4a8a1a233f8f0 = $(
+			`<div id="html_412a0985d0cadf8640f4a8a1a233f8f0" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_7df3e3fba41f7b808972e11a5090b825.setContent(
-			html_4e3b8a2e20108fe1d98781a483db58d7
+		popup_d66d3e3d7a9c70cd4bac10ec5941fcff.setContent(
+			html_412a0985d0cadf8640f4a8a1a233f8f0
 		);
 
-		marker_6ba2e36c75bee882c0d014d7f7a365b7.bindPopup(
-			popup_7df3e3fba41f7b808972e11a5090b825
+		marker_c9b6d11dc660535d54a16616b30a8641.bindPopup(
+			popup_d66d3e3d7a9c70cd4bac10ec5941fcff
 		);
 
-		var marker_2e539d7ab36b05c19384d17ba336ac46 = L.marker(
+		var marker_a1605ffa3157d5e3d40fdbdd305723d3 = L.marker(
 			[42.420952, -70.99895846891361],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_7714c721e8eb5dad2d096bfd8ad7507a = L.AwesomeMarkers.icon({
+		var icon_1d79314938e87019828b50cbc3bb05ad = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "hospital",
 			iconColor: "white",
 			markerColor: "pink",
 			prefix: "fa",
 		});
-		marker_2e539d7ab36b05c19384d17ba336ac46.setIcon(
-			icon_7714c721e8eb5dad2d096bfd8ad7507a
+		marker_a1605ffa3157d5e3d40fdbdd305723d3.setIcon(
+			icon_1d79314938e87019828b50cbc3bb05ad
 		);
 
-		var popup_de7e3911a7a92af14a3a2db82cf0c0ac = L.popup({ maxWidth: "100%" });
+		var popup_c878b4c5aeae0924ca339dc368d87323 = L.popup({ maxWidth: "100%" });
 
-		var html_723ada04bd00cd18fc4d5b243c702652 = $(
-			`<div id="html_723ada04bd00cd18fc4d5b243c702652" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
+		var html_2640e74b4cf5aa4fad0608779f13bb42 = $(
+			`<div id="html_2640e74b4cf5aa4fad0608779f13bb42" style="width: 100.0%; height: 100.0%;">                          <div id="NeighborHealth (formerly East Boston Community Health Center)">NeighborHealth (formerly East Boston Community Health Center)</div>                                                  </div>`
 		)[0];
-		popup_de7e3911a7a92af14a3a2db82cf0c0ac.setContent(
-			html_723ada04bd00cd18fc4d5b243c702652
+		popup_c878b4c5aeae0924ca339dc368d87323.setContent(
+			html_2640e74b4cf5aa4fad0608779f13bb42
 		);
 
-		marker_2e539d7ab36b05c19384d17ba336ac46.bindPopup(
-			popup_de7e3911a7a92af14a3a2db82cf0c0ac
+		marker_a1605ffa3157d5e3d40fdbdd305723d3.bindPopup(
+			popup_c878b4c5aeae0924ca339dc368d87323
 		);
 
-		var marker_8cf6a5407c2265df3a061bcfa844f9c3 = L.marker(
+		var marker_b0b73e4009f6b3f3c7e3ecf233feaf2c = L.marker(
 			[42.3640688, -71.0594262],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_96608f9767607429bc309d0176482127 = L.AwesomeMarkers.icon({
+		var icon_6413b5f84c6aaf974e0df5aca07bd791 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "gavel",
 			iconColor: "white",
 			markerColor: "orange",
 			prefix: "fa",
 		});
-		marker_8cf6a5407c2265df3a061bcfa844f9c3.setIcon(
-			icon_96608f9767607429bc309d0176482127
+		marker_b0b73e4009f6b3f3c7e3ecf233feaf2c.setIcon(
+			icon_6413b5f84c6aaf974e0df5aca07bd791
 		);
 
-		var popup_51661365eabc742b8d59267320031c3a = L.popup({ maxWidth: "100%" });
+		var popup_45f57843f4c80865bde4066c04569657 = L.popup({ maxWidth: "100%" });
 
-		var html_01152a9fa300e91b2ee2b85444784c7b = $(
-			`<div id="html_01152a9fa300e91b2ee2b85444784c7b" style="width: 100.0%; height: 100.0%;">                          <div id="MIRA (Massachusetts Immigrant and Refugee Advocacy Coalition)">MIRA (Massachusetts Immigrant and Refugee Advocacy Coalition)</div>                                                  </div>`
+		var html_842cfd807fbbd8eca50c1a8480c4ef05 = $(
+			`<div id="html_842cfd807fbbd8eca50c1a8480c4ef05" style="width: 100.0%; height: 100.0%;">                          <div id="MIRA (Massachusetts Immigrant and Refugee Advocacy Coalition)">MIRA (Massachusetts Immigrant and Refugee Advocacy Coalition)</div>                                                  </div>`
 		)[0];
-		popup_51661365eabc742b8d59267320031c3a.setContent(
-			html_01152a9fa300e91b2ee2b85444784c7b
+		popup_45f57843f4c80865bde4066c04569657.setContent(
+			html_842cfd807fbbd8eca50c1a8480c4ef05
 		);
 
-		marker_8cf6a5407c2265df3a061bcfa844f9c3.bindPopup(
-			popup_51661365eabc742b8d59267320031c3a
+		marker_b0b73e4009f6b3f3c7e3ecf233feaf2c.bindPopup(
+			popup_45f57843f4c80865bde4066c04569657
 		);
 
-		var marker_933a85bd87377a00accbed9e7f21f98e = L.marker(
+		var marker_a50086e0bed06fa095d582fefcec0ae7 = L.marker(
 			[42.3518221, -71.0573484],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_b52739acb45040f311c7856f611a60b5 = L.AwesomeMarkers.icon({
+		var icon_bb09561857ed0447304127ff7d6babba = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "question",
 			iconColor: "white",
 			markerColor: "lightblue",
 			prefix: "fa",
 		});
-		marker_933a85bd87377a00accbed9e7f21f98e.setIcon(
-			icon_b52739acb45040f311c7856f611a60b5
+		marker_a50086e0bed06fa095d582fefcec0ae7.setIcon(
+			icon_bb09561857ed0447304127ff7d6babba
 		);
 
-		var popup_86515a702e77fa70e2c6d5fe413ebaa0 = L.popup({ maxWidth: "100%" });
+		var popup_7992d6af58275b8dab0ad7b283528903 = L.popup({ maxWidth: "100%" });
 
-		var html_1a62917617aadb44a7b7e455c32dc3c4 = $(
-			`<div id="html_1a62917617aadb44a7b7e455c32dc3c4" style="width: 100.0%; height: 100.0%;">                          <div id="Center to Support Immigrant Organizing">Center to Support Immigrant Organizing</div>                                                  </div>`
+		var html_e6b6f7d4c1497f2dac39891298de7021 = $(
+			`<div id="html_e6b6f7d4c1497f2dac39891298de7021" style="width: 100.0%; height: 100.0%;">                          <div id="Center to Support Immigrant Organizing">Center to Support Immigrant Organizing</div>                                                  </div>`
 		)[0];
-		popup_86515a702e77fa70e2c6d5fe413ebaa0.setContent(
-			html_1a62917617aadb44a7b7e455c32dc3c4
+		popup_7992d6af58275b8dab0ad7b283528903.setContent(
+			html_e6b6f7d4c1497f2dac39891298de7021
 		);
 
-		marker_933a85bd87377a00accbed9e7f21f98e.bindPopup(
-			popup_86515a702e77fa70e2c6d5fe413ebaa0
+		marker_a50086e0bed06fa095d582fefcec0ae7.bindPopup(
+			popup_7992d6af58275b8dab0ad7b283528903
 		);
 
-		var marker_097dbdb9e389e0852e5578cffe918270 = L.marker(
+		var marker_b0b6b9b29cdc6b1f6733e58486b728d3 = L.marker(
 			[42.3638865390222, -71.06021109003544],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_2ce33e3920c940ac4bc7a90173f04357 = L.AwesomeMarkers.icon({
+		var icon_32661d237d77af7dfe9a441f89dd88a0 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "gavel",
 			iconColor: "white",
 			markerColor: "orange",
 			prefix: "fa",
 		});
-		marker_097dbdb9e389e0852e5578cffe918270.setIcon(
-			icon_2ce33e3920c940ac4bc7a90173f04357
+		marker_b0b6b9b29cdc6b1f6733e58486b728d3.setIcon(
+			icon_32661d237d77af7dfe9a441f89dd88a0
 		);
 
-		var popup_abdf6e9ba9278f44271f6c355dc420fc = L.popup({ maxWidth: "100%" });
+		var popup_35d30a845232c3ff46d017466af78894 = L.popup({ maxWidth: "100%" });
 
-		var html_61dc99235a256903e812d202ca0e9343 = $(
-			`<div id="html_61dc99235a256903e812d202ca0e9343" style="width: 100.0%; height: 100.0%;">                          <div id="Greater Boston Legal Services">Greater Boston Legal Services</div>                                                  </div>`
+		var html_b0e847f62c292b3dcb2daa759c486361 = $(
+			`<div id="html_b0e847f62c292b3dcb2daa759c486361" style="width: 100.0%; height: 100.0%;">                          <div id="Greater Boston Legal Services">Greater Boston Legal Services</div>                                                  </div>`
 		)[0];
-		popup_abdf6e9ba9278f44271f6c355dc420fc.setContent(
-			html_61dc99235a256903e812d202ca0e9343
+		popup_35d30a845232c3ff46d017466af78894.setContent(
+			html_b0e847f62c292b3dcb2daa759c486361
 		);
 
-		marker_097dbdb9e389e0852e5578cffe918270.bindPopup(
-			popup_abdf6e9ba9278f44271f6c355dc420fc
+		marker_b0b6b9b29cdc6b1f6733e58486b728d3.bindPopup(
+			popup_35d30a845232c3ff46d017466af78894
 		);
 
-		var marker_baed5b8bd0e0fc0552e87303d60fe840 = L.marker(
+		var marker_fd978aaeb69f755b692afcc98a42fed3 = L.marker(
 			[42.3304191, -71.0934607062716],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_f9e834720b6be84075ba878f48976d19 = L.AwesomeMarkers.icon({
+		var icon_61d37224fb221059ff18bab55f780a05 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			iconColor: "white",
 			markerColor: "darkred",
 			prefix: "fa",
 		});
-		marker_baed5b8bd0e0fc0552e87303d60fe840.setIcon(
-			icon_f9e834720b6be84075ba878f48976d19
+		marker_fd978aaeb69f755b692afcc98a42fed3.setIcon(
+			icon_61d37224fb221059ff18bab55f780a05
 		);
 
-		var popup_d01f9cb281fb2b9b885cd3ef57549be8 = L.popup({ maxWidth: "100%" });
+		var popup_81be8a606ac900fdaa009221ee73b634 = L.popup({ maxWidth: "100%" });
 
-		var html_78bfa839ff4f143648a079e914bfae5d = $(
-			`<div id="html_78bfa839ff4f143648a079e914bfae5d" style="width: 100.0%; height: 100.0%;">                          <div id="Waldo Immigration and Refugee Services Inc">Waldo Immigration and Refugee Services Inc</div>                                                  </div>`
+		var html_cfdd4c64132af82c5f49eb5e7a5693e2 = $(
+			`<div id="html_cfdd4c64132af82c5f49eb5e7a5693e2" style="width: 100.0%; height: 100.0%;">                          <div id="Waldo Immigration and Refugee Services Inc">Waldo Immigration and Refugee Services Inc</div>                                                  </div>`
 		)[0];
-		popup_d01f9cb281fb2b9b885cd3ef57549be8.setContent(
-			html_78bfa839ff4f143648a079e914bfae5d
+		popup_81be8a606ac900fdaa009221ee73b634.setContent(
+			html_cfdd4c64132af82c5f49eb5e7a5693e2
 		);
 
-		marker_baed5b8bd0e0fc0552e87303d60fe840.bindPopup(
-			popup_d01f9cb281fb2b9b885cd3ef57549be8
+		marker_fd978aaeb69f755b692afcc98a42fed3.bindPopup(
+			popup_81be8a606ac900fdaa009221ee73b634
 		);
 
-		var marker_3c8832e5950ea59551c6a714a691b68d = L.marker(
+		var marker_4cb2283bcf9c89532568f381324bc72b = L.marker(
 			[42.3518221, -71.0573484],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_60aba2e1db275f37e8a16272d1ff6f0c = L.AwesomeMarkers.icon({
+		var icon_723bb865401d4afd4df88f43b55ee199 = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "book",
 			iconColor: "white",
 			markerColor: "green",
 			prefix: "fa",
 		});
-		marker_3c8832e5950ea59551c6a714a691b68d.setIcon(
-			icon_60aba2e1db275f37e8a16272d1ff6f0c
+		marker_4cb2283bcf9c89532568f381324bc72b.setIcon(
+			icon_723bb865401d4afd4df88f43b55ee199
 		);
 
-		var popup_14e1e75c233bbc7f7e5c17d62f5dc3f7 = L.popup({ maxWidth: "100%" });
+		var popup_a52deb6ed724dc1b55d04796af63485c = L.popup({ maxWidth: "100%" });
 
-		var html_bc2502b18f3a76f7cac1919f82b0831d = $(
-			`<div id="html_bc2502b18f3a76f7cac1919f82b0831d" style="width: 100.0%; height: 100.0%;">                          <div id="African Community Economic Development of New England (ACEDONE)">African Community Economic Development of New England (ACEDONE)</div>                                                  </div>`
+		var html_18fddcb0be3139502cbebcb764ea794e = $(
+			`<div id="html_18fddcb0be3139502cbebcb764ea794e" style="width: 100.0%; height: 100.0%;">                          <div id="African Community Economic Development of New England (ACEDONE)">African Community Economic Development of New England (ACEDONE)</div>                                                  </div>`
 		)[0];
-		popup_14e1e75c233bbc7f7e5c17d62f5dc3f7.setContent(
-			html_bc2502b18f3a76f7cac1919f82b0831d
+		popup_a52deb6ed724dc1b55d04796af63485c.setContent(
+			html_18fddcb0be3139502cbebcb764ea794e
 		);
 
-		marker_3c8832e5950ea59551c6a714a691b68d.bindPopup(
-			popup_14e1e75c233bbc7f7e5c17d62f5dc3f7
+		marker_4cb2283bcf9c89532568f381324bc72b.bindPopup(
+			popup_a52deb6ed724dc1b55d04796af63485c
 		);
 
-		var marker_27ee97f0534a9b32ed506861bcfc7af8 = L.marker(
+		var marker_599a5712fa59f4205b87a50f633dae65 = L.marker(
 			[42.32992935, -71.09082194557121],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_26580f83c32c1a60d815efeb28de10c1 = L.AwesomeMarkers.icon({
+		var icon_bdbc6471b736a61dec14c71c8683951d = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "book",
 			iconColor: "white",
 			markerColor: "green",
 			prefix: "fa",
 		});
-		marker_27ee97f0534a9b32ed506861bcfc7af8.setIcon(
-			icon_26580f83c32c1a60d815efeb28de10c1
+		marker_599a5712fa59f4205b87a50f633dae65.setIcon(
+			icon_bdbc6471b736a61dec14c71c8683951d
 		);
 
-		var popup_88c03d7e6eb64a34e4fe4256c62d3581 = L.popup({ maxWidth: "100%" });
+		var popup_2440ac744a9aeaeeab241ccd2a06a6e4 = L.popup({ maxWidth: "100%" });
 
-		var html_922dbbde094610b8fdb3cca1119315c4 = $(
-			`<div id="html_922dbbde094610b8fdb3cca1119315c4" style="width: 100.0%; height: 100.0%;">                          <div id="African Community Economic Development of New England (ACEDONE)">African Community Economic Development of New England (ACEDONE)</div>                                                  </div>`
+		var html_58234fe8bdc0264ed632abada5a95d93 = $(
+			`<div id="html_58234fe8bdc0264ed632abada5a95d93" style="width: 100.0%; height: 100.0%;">                          <div id="African Community Economic Development of New England (ACEDONE)">African Community Economic Development of New England (ACEDONE)</div>                                                  </div>`
 		)[0];
-		popup_88c03d7e6eb64a34e4fe4256c62d3581.setContent(
-			html_922dbbde094610b8fdb3cca1119315c4
+		popup_2440ac744a9aeaeeab241ccd2a06a6e4.setContent(
+			html_58234fe8bdc0264ed632abada5a95d93
 		);
 
-		marker_27ee97f0534a9b32ed506861bcfc7af8.bindPopup(
-			popup_88c03d7e6eb64a34e4fe4256c62d3581
+		marker_599a5712fa59f4205b87a50f633dae65.bindPopup(
+			popup_2440ac744a9aeaeeab241ccd2a06a6e4
 		);
 
-		var marker_1359dd101e3ed2ba0ce5212c19472424 = L.marker(
+		var marker_416822bd15ee35c5d4e4dab1f0650390 = L.marker(
 			[42.365624, -71.0587343],
 			{ color: "blue" }
-		).addTo(map_971e343df3820abbc09dab2ab257ddc0);
+		).addTo(map_8e2f089a1c7e4448be1b60e5d8b364f1);
 
-		var icon_10994a2723e766f323727dfc9736838b = L.AwesomeMarkers.icon({
+		var icon_0005d564b55832762466476c47d8a83a = L.AwesomeMarkers.icon({
 			extraClasses: "fa-rotate-0",
 			icon: "gavel",
 			iconColor: "white",
 			markerColor: "orange",
 			prefix: "fa",
 		});
-		marker_1359dd101e3ed2ba0ce5212c19472424.setIcon(
-			icon_10994a2723e766f323727dfc9736838b
+		marker_416822bd15ee35c5d4e4dab1f0650390.setIcon(
+			icon_0005d564b55832762466476c47d8a83a
 		);
 
-		var popup_8d7da281626cd2ecc4d5d5d910d7f6d8 = L.popup({ maxWidth: "100%" });
+		var popup_845856bd3249de589e7e3e9a931ba735 = L.popup({ maxWidth: "100%" });
 
-		var html_cfd70d0a99ffaf6e08e4478a843ee55c = $(
-			`<div id="html_cfd70d0a99ffaf6e08e4478a843ee55c" style="width: 100.0%; height: 100.0%;">                          <div id="Political Asylum Immigration Representation Project (PAIR) ">Political Asylum Immigration Representation Project (PAIR) </div>                                                  </div>`
+		var html_c733906a17acc51875747da296c80e2c = $(
+			`<div id="html_c733906a17acc51875747da296c80e2c" style="width: 100.0%; height: 100.0%;">                          <div id="Political Asylum Immigration Representation Project (PAIR) ">Political Asylum Immigration Representation Project (PAIR) </div>                                                  </div>`
 		)[0];
-		popup_8d7da281626cd2ecc4d5d5d910d7f6d8.setContent(
-			html_cfd70d0a99ffaf6e08e4478a843ee55c
+		popup_845856bd3249de589e7e3e9a931ba735.setContent(
+			html_c733906a17acc51875747da296c80e2c
 		);
 
-		marker_1359dd101e3ed2ba0ce5212c19472424.bindPopup(
-			popup_8d7da281626cd2ecc4d5d5d910d7f6d8
+		marker_416822bd15ee35c5d4e4dab1f0650390.bindPopup(
+			popup_845856bd3249de589e7e3e9a931ba735
 		);
 
-		function sayPlace(org_name) {
-			$(document).trigger("checkLocation", { name: org_name });
+		function sayPlace(org_name, location) {
+			$(document).trigger("checkLocation", { name: org_name, location });
 		}
 
 		$(() => {
-			marker_ec57f89da2c6947d3e99663634ba0794.on("click", () => {
-				sayPlace("The Immigrant Learning Center");
-			});
-			marker_55f5971adff89bb38b4aa20f5c5ee01a.on("click", () => {
-				sayPlace("Immigrant Family Services Institute ");
-			});
-			marker_a629e15d852c8a186e0431d8a3f4a6c8.on("click", () => {
-				sayPlace("Rian Immigrant Center");
-			});
-			marker_3079fd9b522652434ab9b1ca2fa3fbef.on("click", () => {
-				sayPlace("International Institute of New England");
-			});
-			marker_50c203ac69066ab2d228731f35d30951.on("click", () => {
-				sayPlace("Action for Boston Community Development");
-			});
-			marker_6b7d2f3df8ed5ec7c7e7944909b08b2b.on("click", () => {
-				sayPlace("East Boston Community Council");
-			});
-			marker_408b2f713870b7646e3f7593539c3518.on("click", () => {
-				sayPlace("Catholic Charities Boston");
-			});
-			marker_8e43c3ddaa4b53d6864b2e7af99290a2.on("click", () => {
-				sayPlace("Jewish Vocational Service");
-			});
-			marker_68b42cfa1a8b648c10df0518ec67a1ee.on("click", () => {
-				sayPlace("MassHire Downtown Boston Career Center");
-			});
-			marker_2687461257f81e8f840bb5ea7a178207.on("click", () => {
-				sayPlace("East Boston Community Soup Kitchen");
-			});
-			marker_d332eec366be6e5d31f3e6c62a5cfc96.on("click", () => {
-				sayPlace("Roslindale Food Collective");
-			});
-			marker_c5816917d3b74598de85f45b5c52c22f.on("click", () => {
-				sayPlace("Fair Foods: First Parish Church");
-			});
-			marker_ad92316eb1d6a2e4558dffce96dfa26e.on("click", () => {
-				sayPlace("Project Citizenship");
-			});
-			marker_3f5f7b0850859eb665513fc2f9c67414.on("click", () => {
-				sayPlace("Refugee & Immigrant Assistance Center (RIAC)");
-			});
-			marker_ac478922e0315551f05ea2e329a55d13.on("click", () => {
-				sayPlace("Mass Office for Refugees and Immigrants (ORI)");
-			});
-			marker_93fb1c878ca81ed48c4d4c6724592718.on("click", () => {
-				sayPlace("Kids in Need of Defense (KIND)");
-			});
-			marker_fb4362846938b6249d1707c211eff714.on("click", () => {
-				sayPlace("Boston Healthcare for the Homeless");
-			});
-			marker_f9f9bc86ff3628f8bda3734d6e59fc94.on("click", () => {
-				sayPlace("Centro Presente");
-			});
-			marker_46b7b92da4c947ad7aefbc8275f3e365.on("click", () => {
+			marker_483a31ba3dfab3020341374dba0a7e22.on("click", () => {
 				sayPlace(
-					"Boston Center for Refugee Health & Human Rights (program of Immigrant and Refugee Health Center at Boston Medical Center)"
+					"The Immigrant Learning Center",
+					"442 Main Street, Malden, MA 02148"
 				);
 			});
-			marker_852b414b3567ffd58c3f7ef95ed9d53e.on("click", () => {
-				sayPlace("Massachusetts Alliance of Portuguese Speakers (MAPS)");
-			});
-			marker_91e0f9ec214332143b02b693494b6620.on("click", () => {
-				sayPlace("Greater Boston Food Bank");
-			});
-			marker_fcb3aaec6cf255c0235f5b242a5463d3.on("click", () => {
-				sayPlace("Brazillian Worker Center (BWC)");
-			});
-			marker_27e8499076eabaf04bfe15eb1d58780e.on("click", () => {
+			marker_6750df618ea6ddabc3f098915b769cc2.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"Immigrant Family Services Institute ",
+					"1626 Blue Hill Avenue, Mattapan, MA 02126"
 				);
 			});
-			marker_72b432261159e40047fc30cdba189fc6.on("click", () => {
+			marker_a839d107d58825f9ec2d78f1224cade0.on("click", () => {
+				sayPlace("Rian Immigrant Center", "One State Street, Boston, MA 02109");
+			});
+			marker_0a942ed9d60246dd0dd7a2484120e311.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"International Institute of New England",
+					"2 Boylston Street, MA 02116"
 				);
 			});
-			marker_e4a1f7deb5da1b80dce2eda1afe53198.on("click", () => {
+			marker_0096849dac46db00f39e7a66e623c8c2.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"Action for Boston Community Development",
+					"178 Tremont St, Boston, MA 02111"
 				);
 			});
-			marker_8e91130943fb4c95941cb685e30fe6c4.on("click", () => {
+			marker_670c0917af0e8a9b3e37c27bb9594d38.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"East Boston Community Council",
+					"282 Meridian St, Boston, MA 02128"
 				);
 			});
-			marker_43163a824221f0b7bdf3911236ae060a.on("click", () => {
+			marker_3ac2127550a97d71f0a1ca67b602d953.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"Catholic Charities Boston",
+					"275 W Broadway, Boston, MA 02127"
 				);
 			});
-			marker_01d23e0a3a6e51592ddaee1c381b55fa.on("click", () => {
+			marker_adda51b23e82fefd35b483e5f359f0c3.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"Jewish Vocational Service",
+					"75 Federal St, Boston, MA 02110"
 				);
 			});
-			marker_f584e1e31c8b8df61a76497b37d5c277.on("click", () => {
+			marker_62775746e98379b706f9ef501c149e30.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"MassHire Downtown Boston Career Center",
+					"75 Federal St, Boston, MA 02110"
 				);
 			});
-			marker_8f9d00afe5ecce9f3e8ffdd8d40aa2cb.on("click", () => {
+			marker_1504a0cb6fd7740a76673274c440650c.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"East Boston Community Soup Kitchen",
+					"Our Saviour’s Lutheran Church, 28 Paris Street, Boston, MA, 02128"
 				);
 			});
-			marker_aa7fc96f45568fbfe781867bffdaf5c8.on("click", () => {
+			marker_c03087974fe4735bd3139eca2c90cfb2.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"Roslindale Food Collective",
+					"1195 Centre Street, West Roxbury"
 				);
 			});
-			marker_143037f0d7c4254821f28a774ea1bcaa.on("click", () => {
+			marker_f88c9082642a42e12827f85bcb54c395.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"Fair Foods: First Parish Church",
+					"10 Parish St, Dorchester, MA 02122"
 				);
 			});
-			marker_a77a6158d944d16c47b91b432312437d.on("click", () => {
+			marker_0bc2b5311593d86b49b3f6c30fecdb12.on("click", () => {
+				sayPlace("Project Citizenship", "11 Beacon St, Boston, MA 02108");
+			});
+			marker_feb0a568204976180840f9222b92a293.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"Refugee & Immigrant Assistance Center (RIAC)",
+					"253 Roxbury St, Boston, MA 02119"
 				);
 			});
-			marker_85124ff76ccd5f88f4dca80defb84c16.on("click", () => {
+			marker_c59b8550d7ecf693bf6100af63c8cec0.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"Mass Office for Refugees and Immigrants (ORI)",
+					"600 Washington St, Boston, MA 02111"
 				);
 			});
-			marker_6ba2e36c75bee882c0d014d7f7a365b7.on("click", () => {
+			marker_ff72edffde3a733454572eaa4c062b4e.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"Kids in Need of Defense (KIND)",
+					"11 Beacon St, Boston MA 02108"
 				);
 			});
-			marker_2e539d7ab36b05c19384d17ba336ac46.on("click", () => {
+			marker_2826885dd003ab4702c6ea0f587b288a.on("click", () => {
 				sayPlace(
-					"NeighborHealth (formerly East Boston Community Health Center)"
+					"Boston Healthcare for the Homeless",
+					"780 Albany Street, MA 02118"
 				);
 			});
-			marker_8cf6a5407c2265df3a061bcfa844f9c3.on("click", () => {
+			marker_bd9cb0c109a2e4cc0d3689e0131a33bd.on("click", () => {
+				sayPlace("Centro Presente", "12 Bennington St, MA 02145");
+			});
+			marker_d27aeefd8e9aa696a9a317b7012a49a5.on("click", () => {
 				sayPlace(
-					"MIRA (Massachusetts Immigrant and Refugee Advocacy Coalition)"
+					"Boston Center for Refugee Health & Human Rights (program of Immigrant and Refugee Health Center at Boston Medical Center)",
+					"850 Harrison Ave, Boston, MA 02118"
 				);
 			});
-			marker_933a85bd87377a00accbed9e7f21f98e.on("click", () => {
-				sayPlace("Center to Support Immigrant Organizing");
-			});
-			marker_097dbdb9e389e0852e5578cffe918270.on("click", () => {
-				sayPlace("Greater Boston Legal Services");
-			});
-			marker_baed5b8bd0e0fc0552e87303d60fe840.on("click", () => {
-				sayPlace("Waldo Immigration and Refugee Services Inc");
-			});
-			marker_3c8832e5950ea59551c6a714a691b68d.on("click", () => {
+			marker_f75958c1ffb0ce72a8b52510aef0c2c0.on("click", () => {
 				sayPlace(
-					"African Community Economic Development of New England (ACEDONE)"
+					"Massachusetts Alliance of Portuguese Speakers (MAPS)",
+					"697 Cambridge St., Brighton, MA 02135"
 				);
 			});
-			marker_27ee97f0534a9b32ed506861bcfc7af8.on("click", () => {
+			marker_3e2b15095485b67f788028016ee53bc0.on("click", () => {
 				sayPlace(
-					"African Community Economic Development of New England (ACEDONE)"
+					"Greater Boston Food Bank",
+					"70 South Bay Avenue, Boston, MA 02118"
 				);
 			});
-			marker_1359dd101e3ed2ba0ce5212c19472424.on("click", () => {
-				sayPlace("Political Asylum Immigration Representation Project (PAIR) ");
+			marker_34c3d98d47d89e1f5dec77fdbf9a6730.on("click", () => {
+				sayPlace(
+					"Brazillian Worker Center (BWC)",
+					"14 Harvard Ave # 2, Allston, MA 02134"
+				);
+			});
+			marker_b0a68cb9273ea566ae0eb23b13205e92.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"20 Maverick Square, Boston MA"
+				);
+			});
+			marker_dae3847a680cdc4de60d45ba5830fa1e.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"10 Gove Street, Boston MA"
+				);
+			});
+			marker_0307e7a34f40eb95c5f00651c0f9d498.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"79 Paris Street, Boston MA"
+				);
+			});
+			marker_88cc0bf8cecce3396ff77c2624f9df9f.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"250 Sumner Street, Boston MA"
+				);
+			});
+			marker_4962fda3d4ff73be769843c1539fba0d.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"282 Meridian Street, Boston MA"
+				);
+			});
+			marker_259946912137d0feff58a2b358fab25e.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"151 Orleans Street, Boston MA"
+				);
+			});
+			marker_5347073856ceacd82e402487f2e80a3c.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"155 Addison Street, Boston MA"
+				);
+			});
+			marker_5e12defcd91420c9209e645bb026a66c.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"225 Sumner Street, Boston MA"
+				);
+			});
+			marker_7e19e790a39a91976aa53a33231155ae.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"1601 Washington Street, Boston MA"
+				);
+			});
+			marker_6e485183790e46a5cb400997bff55b99.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"400 Shawmut Avenue, Boston MA"
+				);
+			});
+			marker_96a1d60f91164780d959ecb6449d4abf.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"17 Main Street, Boston MA"
+				);
+			});
+			marker_2bec7648d3d7c0929a9ccdc9719e4588.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"26 Sturgis Street, MA 02132"
+				);
+			});
+			marker_c9b6d11dc660535d54a16616b30a8641.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"801 Broadway, Boston MA"
+				);
+			});
+			marker_a1605ffa3157d5e3d40fdbdd305723d3.on("click", () => {
+				sayPlace(
+					"NeighborHealth (formerly East Boston Community Health Center)",
+					"10 Garofalo Street, MA 02151"
+				);
+			});
+			marker_b0b73e4009f6b3f3c7e3ecf233feaf2c.on("click", () => {
+				sayPlace(
+					"MIRA (Massachusetts Immigrant and Refugee Advocacy Coalition)",
+					"69 Canal Street, Boston, MA 02114"
+				);
+			});
+			marker_a50086e0bed06fa095d582fefcec0ae7.on("click", () => {
+				sayPlace(
+					"Center to Support Immigrant Organizing",
+					"89 South Street, Boston, MA. 02111"
+				);
+			});
+			marker_b0b6b9b29cdc6b1f6733e58486b728d3.on("click", () => {
+				sayPlace(
+					"Greater Boston Legal Services",
+					"197 Friend Street Boston, MA 02114"
+				);
+			});
+			marker_fd978aaeb69f755b692afcc98a42fed3.on("click", () => {
+				sayPlace(
+					"Waldo Immigration and Refugee Services Inc",
+					"257 Roxbury Street, Roxbury MA 02119"
+				);
+			});
+			marker_4cb2283bcf9c89532568f381324bc72b.on("click", () => {
+				sayPlace(
+					"African Community Economic Development of New England (ACEDONE)",
+					"89 South Street, Boston, MA 02111"
+				);
+			});
+			marker_599a5712fa59f4205b87a50f633dae65.on("click", () => {
+				sayPlace(
+					"African Community Economic Development of New England (ACEDONE)",
+					"48 John Eliot Square, Roxbury MA 02119"
+				);
+			});
+			marker_416822bd15ee35c5d4e4dab1f0650390.on("click", () => {
+				sayPlace(
+					"Political Asylum Immigration Representation Project (PAIR) ",
+					"98 N Washington st, Boston, MA 02114"
+				);
 			});
 		});
 	</script>
