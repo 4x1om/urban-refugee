@@ -76,6 +76,9 @@
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 		/>
 		<style>
+
+
+
 			#map_8e2f089a1c7e4448be1b60e5d8b364f1 {
 				position: relative;
 				width: 100%;
@@ -86,13 +89,21 @@
 			.leaflet-container {
 				font-size: 1rem;
 			}
+
+			#overlayImage {
+			right:0;
+            position: absolute;
+            z-index: 1001; /* Set higher z-index */
+        }
 		</style>
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body class="anuphan-regular">
 		<div class="app-container">
 			<div class="map-container">
-				<div class="folium-map" id="map_8e2f089a1c7e4448be1b60e5d8b364f1"></div>
+				<a href="https://urbanrefuge.org/home-1" target="_blank" rel="noopener noreferrer"><img id="overlayImage" src="urbanrefuge.png" alt="logo" height="100"></a>
+				<div class="folium-map" id="map_8e2f089a1c7e4448be1b60e5d8b364f1">
+				</div>
 			</div>
 
 			<div class="sidebar hidden">
