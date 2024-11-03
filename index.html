@@ -95,7 +95,7 @@
 				<div class="folium-map" id="map_8e2f089a1c7e4448be1b60e5d8b364f1"></div>
 			</div>
 
-			<div class="sidebar">
+			<div class="sidebar hidden">
 				<div class="refuge-main-container">
 					<h1 class="refuge-title">
 						NeighborHealth (formerly East Boston Community Health Center)
@@ -147,7 +147,8 @@
 				if (data && "name" in data) {
 					const { name, location } = data;
 					const refuge = refuges[data.name];
-					$(".refuge-main-container").show();
+					// $(".sidebar").show();
+					$(".sidebar").removeClass("hidden");
 
 					$(".refuge-title").text(refuge.name);
 					$(".refuge-neighborhood").text(refuge.neighborhood);
@@ -256,6 +257,9 @@
 		</svg>
 		<script>
 			$(() => {
+				map_8e2f089a1c7e4448be1b60e5d8b364f1.on("click", () => {
+					$(".sidebar").addClass("hidden");
+				});
 				$(".refuge-address-icon").append(
 					$('<svg><use xlink:href="#icon-pinpoint"></use></svg>')
 				);
@@ -852,7 +856,7 @@
 		var map_8e2f089a1c7e4448be1b60e5d8b364f1 = L.map(
 			"map_8e2f089a1c7e4448be1b60e5d8b364f1",
 			{
-				center: [42.35, -71.2],
+				center: [42.35, -70.9],
 				crs: L.CRS.EPSG3857,
 				maxBounds: [
 					[-90, -180],
@@ -2135,6 +2139,7 @@
 			$(document).trigger("checkLocation", { name: org_name, location });
 		}
 
+		var markers = [];
 		$(() => {
 			marker_483a31ba3dfab3020341374dba0a7e22.on("click", () => {
 				sayPlace(
@@ -2142,248 +2147,297 @@
 					"442 Main Street, Malden, MA 02148"
 				);
 			});
+			markers.push(marker_483a31ba3dfab3020341374dba0a7e22);
 			marker_6750df618ea6ddabc3f098915b769cc2.on("click", () => {
 				sayPlace(
 					"Immigrant Family Services Institute ",
 					"1626 Blue Hill Avenue, Mattapan, MA 02126"
 				);
 			});
+			markers.push(marker_6750df618ea6ddabc3f098915b769cc2);
 			marker_a839d107d58825f9ec2d78f1224cade0.on("click", () => {
 				sayPlace("Rian Immigrant Center", "One State Street, Boston, MA 02109");
 			});
+			markers.push(marker_a839d107d58825f9ec2d78f1224cade0);
 			marker_0a942ed9d60246dd0dd7a2484120e311.on("click", () => {
 				sayPlace(
 					"International Institute of New England",
 					"2 Boylston Street, MA 02116"
 				);
 			});
+			markers.push(marker_0a942ed9d60246dd0dd7a2484120e311);
 			marker_0096849dac46db00f39e7a66e623c8c2.on("click", () => {
 				sayPlace(
 					"Action for Boston Community Development",
 					"178 Tremont St, Boston, MA 02111"
 				);
 			});
+			markers.push(marker_0096849dac46db00f39e7a66e623c8c2);
 			marker_670c0917af0e8a9b3e37c27bb9594d38.on("click", () => {
 				sayPlace(
 					"East Boston Community Council",
 					"282 Meridian St, Boston, MA 02128"
 				);
 			});
+			markers.push(marker_670c0917af0e8a9b3e37c27bb9594d38);
 			marker_3ac2127550a97d71f0a1ca67b602d953.on("click", () => {
 				sayPlace(
 					"Catholic Charities Boston",
 					"275 W Broadway, Boston, MA 02127"
 				);
 			});
+			markers.push(marker_3ac2127550a97d71f0a1ca67b602d953);
 			marker_adda51b23e82fefd35b483e5f359f0c3.on("click", () => {
 				sayPlace(
 					"Jewish Vocational Service",
 					"75 Federal St, Boston, MA 02110"
 				);
 			});
+			markers.push(marker_adda51b23e82fefd35b483e5f359f0c3);
 			marker_62775746e98379b706f9ef501c149e30.on("click", () => {
 				sayPlace(
 					"MassHire Downtown Boston Career Center",
 					"75 Federal St, Boston, MA 02110"
 				);
 			});
+			markers.push(marker_62775746e98379b706f9ef501c149e30);
 			marker_1504a0cb6fd7740a76673274c440650c.on("click", () => {
 				sayPlace(
 					"East Boston Community Soup Kitchen",
 					"Our Saviour’s Lutheran Church, 28 Paris Street, Boston, MA, 02128"
 				);
 			});
+			markers.push(marker_1504a0cb6fd7740a76673274c440650c);
 			marker_c03087974fe4735bd3139eca2c90cfb2.on("click", () => {
 				sayPlace(
 					"Roslindale Food Collective",
 					"1195 Centre Street, West Roxbury"
 				);
 			});
+			markers.push(marker_c03087974fe4735bd3139eca2c90cfb2);
 			marker_f88c9082642a42e12827f85bcb54c395.on("click", () => {
 				sayPlace(
 					"Fair Foods: First Parish Church",
 					"10 Parish St, Dorchester, MA 02122"
 				);
 			});
+			markers.push(marker_f88c9082642a42e12827f85bcb54c395);
 			marker_0bc2b5311593d86b49b3f6c30fecdb12.on("click", () => {
 				sayPlace("Project Citizenship", "11 Beacon St, Boston, MA 02108");
 			});
+			markers.push(marker_0bc2b5311593d86b49b3f6c30fecdb12);
 			marker_feb0a568204976180840f9222b92a293.on("click", () => {
 				sayPlace(
 					"Refugee & Immigrant Assistance Center (RIAC)",
 					"253 Roxbury St, Boston, MA 02119"
 				);
 			});
+			markers.push(marker_feb0a568204976180840f9222b92a293);
 			marker_c59b8550d7ecf693bf6100af63c8cec0.on("click", () => {
 				sayPlace(
 					"Mass Office for Refugees and Immigrants (ORI)",
 					"600 Washington St, Boston, MA 02111"
 				);
 			});
+			markers.push(marker_c59b8550d7ecf693bf6100af63c8cec0);
 			marker_ff72edffde3a733454572eaa4c062b4e.on("click", () => {
 				sayPlace(
 					"Kids in Need of Defense (KIND)",
 					"11 Beacon St, Boston MA 02108"
 				);
 			});
+			markers.push(marker_ff72edffde3a733454572eaa4c062b4e);
 			marker_2826885dd003ab4702c6ea0f587b288a.on("click", () => {
 				sayPlace(
 					"Boston Healthcare for the Homeless",
 					"780 Albany Street, MA 02118"
 				);
 			});
+			markers.push(marker_2826885dd003ab4702c6ea0f587b288a);
 			marker_bd9cb0c109a2e4cc0d3689e0131a33bd.on("click", () => {
 				sayPlace("Centro Presente", "12 Bennington St, MA 02145");
 			});
+			markers.push(marker_bd9cb0c109a2e4cc0d3689e0131a33bd);
 			marker_d27aeefd8e9aa696a9a317b7012a49a5.on("click", () => {
 				sayPlace(
 					"Boston Center for Refugee Health & Human Rights (program of Immigrant and Refugee Health Center at Boston Medical Center)",
 					"850 Harrison Ave, Boston, MA 02118"
 				);
 			});
+			markers.push(marker_d27aeefd8e9aa696a9a317b7012a49a5);
 			marker_f75958c1ffb0ce72a8b52510aef0c2c0.on("click", () => {
 				sayPlace(
 					"Massachusetts Alliance of Portuguese Speakers (MAPS)",
 					"697 Cambridge St., Brighton, MA 02135"
 				);
 			});
+			markers.push(marker_f75958c1ffb0ce72a8b52510aef0c2c0);
 			marker_3e2b15095485b67f788028016ee53bc0.on("click", () => {
 				sayPlace(
 					"Greater Boston Food Bank",
 					"70 South Bay Avenue, Boston, MA 02118"
 				);
 			});
+			markers.push(marker_3e2b15095485b67f788028016ee53bc0);
 			marker_34c3d98d47d89e1f5dec77fdbf9a6730.on("click", () => {
 				sayPlace(
 					"Brazillian Worker Center (BWC)",
 					"14 Harvard Ave # 2, Allston, MA 02134"
 				);
 			});
+			markers.push(marker_34c3d98d47d89e1f5dec77fdbf9a6730);
 			marker_b0a68cb9273ea566ae0eb23b13205e92.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"20 Maverick Square, Boston MA"
 				);
 			});
+			markers.push(marker_b0a68cb9273ea566ae0eb23b13205e92);
 			marker_dae3847a680cdc4de60d45ba5830fa1e.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"10 Gove Street, Boston MA"
 				);
 			});
+			markers.push(marker_dae3847a680cdc4de60d45ba5830fa1e);
 			marker_0307e7a34f40eb95c5f00651c0f9d498.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"79 Paris Street, Boston MA"
 				);
 			});
+			markers.push(marker_0307e7a34f40eb95c5f00651c0f9d498);
 			marker_88cc0bf8cecce3396ff77c2624f9df9f.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"250 Sumner Street, Boston MA"
 				);
 			});
+			markers.push(marker_88cc0bf8cecce3396ff77c2624f9df9f);
 			marker_4962fda3d4ff73be769843c1539fba0d.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"282 Meridian Street, Boston MA"
 				);
 			});
+			markers.push(marker_4962fda3d4ff73be769843c1539fba0d);
 			marker_259946912137d0feff58a2b358fab25e.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"151 Orleans Street, Boston MA"
 				);
 			});
+			markers.push(marker_259946912137d0feff58a2b358fab25e);
 			marker_5347073856ceacd82e402487f2e80a3c.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"155 Addison Street, Boston MA"
 				);
 			});
+			markers.push(marker_5347073856ceacd82e402487f2e80a3c);
 			marker_5e12defcd91420c9209e645bb026a66c.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"225 Sumner Street, Boston MA"
 				);
 			});
+			markers.push(marker_5e12defcd91420c9209e645bb026a66c);
 			marker_7e19e790a39a91976aa53a33231155ae.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"1601 Washington Street, Boston MA"
 				);
 			});
+			markers.push(marker_7e19e790a39a91976aa53a33231155ae);
 			marker_6e485183790e46a5cb400997bff55b99.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"400 Shawmut Avenue, Boston MA"
 				);
 			});
+			markers.push(marker_6e485183790e46a5cb400997bff55b99);
 			marker_96a1d60f91164780d959ecb6449d4abf.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"17 Main Street, Boston MA"
 				);
 			});
+			markers.push(marker_96a1d60f91164780d959ecb6449d4abf);
 			marker_2bec7648d3d7c0929a9ccdc9719e4588.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"26 Sturgis Street, MA 02132"
 				);
 			});
+			markers.push(marker_2bec7648d3d7c0929a9ccdc9719e4588);
 			marker_c9b6d11dc660535d54a16616b30a8641.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"801 Broadway, Boston MA"
 				);
 			});
+			markers.push(marker_c9b6d11dc660535d54a16616b30a8641);
 			marker_a1605ffa3157d5e3d40fdbdd305723d3.on("click", () => {
 				sayPlace(
 					"NeighborHealth (formerly East Boston Community Health Center)",
 					"10 Garofalo Street, MA 02151"
 				);
 			});
+			markers.push(marker_a1605ffa3157d5e3d40fdbdd305723d3);
 			marker_b0b73e4009f6b3f3c7e3ecf233feaf2c.on("click", () => {
 				sayPlace(
 					"MIRA (Massachusetts Immigrant and Refugee Advocacy Coalition)",
 					"69 Canal Street, Boston, MA 02114"
 				);
 			});
+			markers.push(marker_b0b73e4009f6b3f3c7e3ecf233feaf2c);
 			marker_a50086e0bed06fa095d582fefcec0ae7.on("click", () => {
 				sayPlace(
 					"Center to Support Immigrant Organizing",
 					"89 South Street, Boston, MA. 02111"
 				);
 			});
+			markers.push(marker_a50086e0bed06fa095d582fefcec0ae7);
 			marker_b0b6b9b29cdc6b1f6733e58486b728d3.on("click", () => {
 				sayPlace(
 					"Greater Boston Legal Services",
 					"197 Friend Street Boston, MA 02114"
 				);
 			});
+			markers.push(marker_b0b6b9b29cdc6b1f6733e58486b728d3);
 			marker_fd978aaeb69f755b692afcc98a42fed3.on("click", () => {
 				sayPlace(
 					"Waldo Immigration and Refugee Services Inc",
 					"257 Roxbury Street, Roxbury MA 02119"
 				);
 			});
+			markers.push(marker_fd978aaeb69f755b692afcc98a42fed3);
 			marker_4cb2283bcf9c89532568f381324bc72b.on("click", () => {
 				sayPlace(
 					"African Community Economic Development of New England (ACEDONE)",
 					"89 South Street, Boston, MA 02111"
 				);
 			});
+			markers.push(marker_4cb2283bcf9c89532568f381324bc72b);
 			marker_599a5712fa59f4205b87a50f633dae65.on("click", () => {
 				sayPlace(
 					"African Community Economic Development of New England (ACEDONE)",
 					"48 John Eliot Square, Roxbury MA 02119"
 				);
 			});
+			markers.push(marker_599a5712fa59f4205b87a50f633dae65);
 			marker_416822bd15ee35c5d4e4dab1f0650390.on("click", () => {
 				sayPlace(
 					"Political Asylum Immigration Representation Project (PAIR) ",
 					"98 N Washington st, Boston, MA 02114"
 				);
+			});
+			markers.push(marker_416822bd15ee35c5d4e4dab1f0650390);
+
+			markers.forEach((marker) => {
+				marker.on("tooltipclose", () => {
+					console.log("closed");
+				});
 			});
 		});
 	</script>
