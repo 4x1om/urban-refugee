@@ -81,41 +81,40 @@
 			</div>
 
 			<div class="sidebar">
-				<h1 class="refuge-title">
-					NeighborHealth (formerly East Boston Community Health Center)
-				</h1>
-				<p class="refuge-neighborhood">Foxbury</p>
-				<p class="refuge-target">Target: Refugees, Immigrants</p>
-				<h2 class="refuge-summary">
-					Refugee resettlement, referrals to services
-				</h2>
-
-				<div class="refuge-type-container">
-					<div class="refuge-type">Legal</div>
-				</div>
-
-				<div class="refuge-filter-container">
-					<div class="refuge-filter">MBTA Accessible</div>
-				</div>
-
-				<div class="refuge-languages-container">
-					<div class="refuge-language">English</div>
-				</div>
-				<div class="refuge-infolist">
-					<div class="icon refuge-address-icon"></div>
-					<p class="text refuge-address-text">
-						253 Roxbury St, Boston, MA 02119
-					</p>
-					<div class="icon refuge-hours-icon"></div>
-					<p class="text refuge-hours-text">9am-5pm</p>
-					<div class="icon refuge-phone-icon"></div>
-					<p class="text refuge-phone-text">(617) 238-2430</p>
-					<div class="icon refuge-website-icon"></div>
-					<p class="text refuge-website-text">
-						<a href="https://www.riacboston.org/where-we-work/"
-							>https://www.riacboston.org/where-we-work/</a
-						>
-					</p>
+				<div class="refuge-main-container">
+					<h1 class="refuge-title">
+						NeighborHealth (formerly East Boston Community Health Center)
+					</h1>
+					<p class="refuge-neighborhood">Foxbury</p>
+					<p class="refuge-target">Target: Refugees, Immigrants</p>
+					<h4 class="refuge-summary">
+						Refugee resettlement, referrals to services
+					</h4>
+					<div class="refuge-type-container">
+						<div class="refuge-type">Legal</div>
+					</div>
+					<div class="refuge-filter-container">
+						<div class="refuge-filter">MBTA Accessible</div>
+					</div>
+					<div class="refuge-languages-container">
+						<div class="refuge-language">English</div>
+					</div>
+					<div class="refuge-infolist">
+						<div class="icon refuge-address-icon"></div>
+						<p class="text refuge-address-text">
+							<a href="#">253 Roxbury St, Boston, MA 02119</a>
+						</p>
+						<div class="icon refuge-hours-icon"></div>
+						<p class="text refuge-hours-text">9am-5pm</p>
+						<div class="icon refuge-phone-icon"></div>
+						<p class="text refuge-phone-text">(617) 238-2430</p>
+						<div class="icon refuge-website-icon"></div>
+						<p class="text refuge-website-text">
+							<a href="https://www.riacboston.org/where-we-work/"
+								>https://www.riacboston.org/where-we-work/</a
+							>
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -124,7 +123,49 @@
 			$(document).on("checkLocation", (evt, data) => {
 				if (data && "name" in data) {
 					const name = data.name;
-					console.log(refuges[name]);
+					const refuge = refuges[data.name];
+					$(".refuge-main-container").show();
+
+					$(".refuge-title").text(refuge.name);
+					$(".refuge-neighborhood").text(refuge.neighborhood);
+					$(".refuge-target").text("Target: " + refuge.target);
+					$(".refuge-summary").text(refuge.summary);
+
+					$(".refuge-type-container").empty();
+					if (refuge.type) {
+						refuge.type.forEach((type) => {
+							const div = $(`<div class="refuge-type">${type}</div>`);
+							$(".refuge-type-container").append(div);
+						});
+					}
+
+					$(".refuge-filter-container").empty();
+					if (refuge.filters) {
+						refuge.filters.forEach((filter) => {
+							const div = $(`<div class="refuge-filter">${filter}</div>`);
+							$(".refuge-filter-container").append(div);
+						});
+					}
+
+					$(".refuge-language-container").empty();
+					if (refuge.languages) {
+						refuge.languages.forEach((language) => {
+							const div = $(`<div class="refuge-language">${language}</div>`);
+							$(".refuge-language-container").append(div);
+						});
+					}
+
+					$(".refuge-address-text a").attr(
+						"href",
+						`https://www.google.com/maps/search/${refuge.address}`
+					);
+					$(".refuge-address-text a").text(refuge.address);
+
+					$(".refuge-hours-text").text(refuge.hours);
+					$(".refuge-phone-text").text(refuge.phone);
+
+					$(".refuge-website-text a").attr("href", refuge.website);
+					$(".refuge-website-text a").text(refuge.website);
 				}
 			});
 		</script>

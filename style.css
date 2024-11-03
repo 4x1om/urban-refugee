@@ -21,16 +21,20 @@ body {
 	flex: 1;
 	box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 	padding: 0 1rem;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.refuge-main-container {
+	display: none;
 }
 
 .refuge-type-container {
 	display: flex;
 	flex-direction: row;
-}
-
-.refuge-neighborhood {
-	font-size: large;
-	color: rgb(168 162 158);
+	column-gap: 0.5rem;
+	row-gap: 0.5rem;
+	flex-wrap: wrap;
 }
 
 .refuge-type {
@@ -39,10 +43,18 @@ body {
 	padding: 0.25rem 0.5rem;
 }
 
+.refuge-neighborhood {
+	font-size: large;
+	color: rgb(168 162 158);
+}
+
 .refuge-filter-container {
 	display: flex;
 	flex-direction: row;
 	margin: 1rem 0;
+	column-gap: 0.5rem;
+	row-gap: 0.5rem;
+	flex-wrap: wrap;
 }
 
 .refuge-filter {
@@ -55,6 +67,9 @@ body {
 	display: flex;
 	flex-direction: row;
 	margin: 1rem 0;
+	column-gap: 0.5rem;
+	row-gap: 0.5rem;
+	flex-wrap: wrap;
 }
 
 .refuge-language {
